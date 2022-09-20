@@ -2,9 +2,12 @@
 
 public class UserInterfaceTests
 {
+    private UserInterface _userInterface;
+
     [SetUp]
     public void Setup()
     {
+        _userInterface = new UserInterface();
     }
 
     [Test]

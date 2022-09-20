@@ -1,10 +1,12 @@
-﻿namespace ExplorerService
+﻿using System.Linq;
+
+namespace ExplorerService
 {
     public class Plateau
     {
         protected int NumPlateauCorners{ get; private set; }
         protected List<int> PlateauCornersCoordinates { get; private set; }
-        protected List<string[]> Obstacle { get; private set; } //structure {{ Obstacle Type, Coordinate X, Coordinate Y }, { Obstacle Type, Coordinate X, Coordinate Y }, etc}
+        protected List<string[]> Obstacle { get; private set; } //structure: {{ Obstacle Type, Coordinate X, Coordinate Y }, { Obstacle Type, Coordinate X, Coordinate Y }, etc}
 
         public Plateau(int numPlateauCorners, List<int> plateauCornersCoordinates)
         {
@@ -37,20 +39,25 @@
 
         public bool IsBoundaryPos(int x, int y)
         {
-            if ( x == 0 || y == 0 || x == 5 || y == 5 ) return true;
-            return false;
-
-            //Following code can get the coordinates of all the points of the Plateau corners,
-            //useful to extend support for different shape of Platau
-            /*
-            int[,] EachCornersCoordinates = new int[NumPlateauCorners, 2];
+            int maxX = 0;
+            int maxY = 0;
+            //Assume lower left hand corner of the Plateau is (0,0)
+            const int minX = 0;
+            const int minY = 0;
+            const int numCoordinates = 2;
+            int[,] eachCornersCoordinates = new int[NumPlateauCorners, numCoordinates];
 
             for (int i = 0; i < NumPlateauCorners; i++)
             {
-                EachCornersCoordinates[i, 0] = PlateauCornersCoordinates[i * 2];
-                EachCornersCoordinates[i, 1] = PlateauCornersCoordinates[i * 2 + 1];
+                eachCornersCoordinates[i, 0] = PlateauCornersCoordinates[i * numCoordinates];
+                eachCornersCoordinates[i, 1] = PlateauCornersCoordinates[i * numCoordinates + 1];
+                //Assume Plateau is rectangle
+                if (maxX < eachCornersCoordinates[i, 0]) maxX = eachCornersCoordinates[i, 0];
+                if (maxY < eachCornersCoordinates[i, 1]) maxY = eachCornersCoordinates[i, 1];
             }
-            */
+
+            if ( x == minX || y == minY || x == maxX || y == maxY ) return true;
+            return false;
         }
     }
 }

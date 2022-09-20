@@ -3,14 +3,12 @@
 public class PlateauTests
 {
     private Plateau _plateau;
-    private CommandCenter _commandCenter;
 
     [SetUp]
     public void Setup()
     {
-        List<int> plateauCornersCoordinates = new List<int> { 0, 0, 0, 5, 5, 5, 5, 0 };
+        List<int> plateauCornersCoordinates = new List<int> { 0, 0, 0, 6, 6, 6, 6, 0 };
         _plateau = new Plateau(4, plateauCornersCoordinates);
-        _commandCenter = new CommandCenter();
     }
 
 /*
@@ -47,9 +45,13 @@ public class PlateauTests
         _plateau.IsBoundaryPos(1, 1).Should().Be(false);
     }
 
-    [Test]
-    public void GivenCoordinatesOfAPointOnThePlateausBoundaryShouldReturnTrue()
+    [TestCase(0, 6)]
+    [TestCase(1, 6)]
+    [TestCase(6, 3)]
+    [TestCase(0, 0)]
+    [TestCase(6, 6)]
+    public void GivenCoordinatesOfAPointOnThePlateausBoundaryShouldReturnTrue(int x, int y)
     {
-        _plateau.IsBoundaryPos(1, 0).Should().Be(true);
+        _plateau.IsBoundaryPos(x, y).Should().Be(true);
     }    
 }
