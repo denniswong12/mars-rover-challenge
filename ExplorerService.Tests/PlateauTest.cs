@@ -27,6 +27,20 @@ public class PlateauTests
     }
 
     [Test]
+    public void AddObstacleWithGivenObstacleTypeAndCoordinatesShouldReturnFalseWhenCallingIsEmptyPosOnTheSameCoordinates()
+    {
+        _plateau.AddObstacle("MarsRover", 0, 1);
+        _plateau.IsEmptyPos(0, 1).Should().Be(false);
+    }
+
+    [Test]
+    public void RemoveObstacleWithGivenObstacleTypeAndCoordinatesShouldReturnTrueWhenCallingIsEmptyPosOnTheSameCoordinates()
+    {
+        _plateau.RemoveObstacle("MarsRover", 0, 1);
+        _plateau.IsEmptyPos(0, 1).Should().Be(true);
+    }
+
+    [Test]
     public void GivenCoordinatesOfAPointNotOnThePlateausBoundaryShouldReturnFalse()
     {
         _plateau.IsBoundaryPos(1, 1).Should().Be(false);
@@ -36,5 +50,5 @@ public class PlateauTests
     public void GivenCoordinatesOfAPointOnThePlateausBoundaryShouldReturnTrue()
     {
         _plateau.IsBoundaryPos(1, 0).Should().Be(true);
-    }
+    }    
 }

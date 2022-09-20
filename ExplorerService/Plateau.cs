@@ -17,7 +17,6 @@ namespace ExplorerService
 
         public bool IsEmptyPos(int x, int y)
         {
-            //Obstacle.Add(new string[] { "MarsRover", "1", "1" });
             foreach (string[] obstacleObject in Obstacle)
             {
                 if (x.ToString() == obstacleObject[1] && y.ToString() == obstacleObject[2])
@@ -26,6 +25,17 @@ namespace ExplorerService
                 }
             }
             return true;
+        }
+
+        public void AddObstacle(string obstacleType, int x, int y)
+        {
+            Obstacle.Add(new string[] { obstacleType, x.ToString(), y.ToString() });
+        }
+
+        public void RemoveObstacle(string obstacleType, int x, int y)
+        {
+            string[] removeObstacle = new string[] { obstacleType, x.ToString(), y.ToString() };
+            Obstacle.Remove(removeObstacle);
         }
 
         public bool IsBoundaryPos(int x, int y)
