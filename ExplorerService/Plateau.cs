@@ -1,12 +1,10 @@
-﻿using System;
-namespace ExplorerService
+﻿namespace ExplorerService
 {
     public class Plateau
     {
-        //{ 0, 0, 0, 5, 5, 5, 5, 0 };
         public int NumPlateauCorners{ get; private set; }
-        public List<int> PlateauCornersCoordinates { get; private set; }
-        public List<string[]> Obstacle { get; set; } //structure {{ Obstacle Type, Coordinate X, Coordinate Y }, { Obstacle Type, Coordinate X, Coordinate Y }, etc}
+        protected List<int> PlateauCornersCoordinates { get; private set; }
+        protected List<string[]> Obstacle { get; private set; } //structure {{ Obstacle Type, Coordinate X, Coordinate Y }, { Obstacle Type, Coordinate X, Coordinate Y }, etc}
 
         public Plateau(int numPlateauCorners, List<int> plateauCornersCoordinates)
         {
@@ -34,12 +32,17 @@ namespace ExplorerService
 
         public void RemoveObstacle(string obstacleType, int x, int y)
         {
-            string[] removeObstacle = new string[] { obstacleType, x.ToString(), y.ToString() };
-            Obstacle.Remove(removeObstacle);
+            Obstacle.Remove(new string[] { obstacleType, x.ToString(), y.ToString() });
         }
 
         public bool IsBoundaryPos(int x, int y)
         {
+            if ( x == 0 || y == 0 || x == 5 || y == 5 ) return true;
+            return false;
+
+            //Following code can get the coordinates of all the points of the Plateau corners,
+            //useful to extend support for different shape of Platau
+            /*
             int[,] EachCornersCoordinates = new int[NumPlateauCorners, 2];
 
             for (int i = 0; i < NumPlateauCorners; i++)
@@ -47,7 +50,7 @@ namespace ExplorerService
                 EachCornersCoordinates[i, 0] = PlateauCornersCoordinates[i * 2];
                 EachCornersCoordinates[i, 1] = PlateauCornersCoordinates[i * 2 + 1];
             }
-            return true;
+            */
         }
     }
 }
