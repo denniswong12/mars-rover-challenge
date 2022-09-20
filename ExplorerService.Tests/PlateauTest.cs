@@ -8,7 +8,7 @@ public class PlateauTests
     [SetUp]
     public void Setup()
     {
-        int[] plateauCornersCoordinates = { 0, 0, 0, 5, 5, 5, 5, 0 };
+        List<int> plateauCornersCoordinates = new List<int> { 0, 0, 0, 5, 5, 5, 5, 0 };
         _plateau = new Plateau(4, plateauCornersCoordinates);
         _commandCenter = new CommandCenter();
     }
@@ -18,7 +18,6 @@ public class PlateauTests
     public void GivenPlateauSizeAndNumberOfPointsShouldBeAbleToCreateAPlateau()
     {
         _plateau.NumPlateauCorners.Should().Be(4);
-//        CollectionAssert.AreEqual(plateauCornersCoordinates, _plateau.PlateauCornersCoordinates);
     }
 
     [Test]
