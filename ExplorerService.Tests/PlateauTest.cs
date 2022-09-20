@@ -13,12 +13,13 @@ public class PlateauTests
         _commandCenter = new CommandCenter();
     }
 
-
+/*
     [Test]
     public void GivenPlateauSizeAndNumberOfPointsShouldBeAbleToCreateAPlateau()
     {
         _plateau.NumPlateauCorners.Should().Be(4);
     }
+*/
 
     [Test]
     public void CheckCoordinatesWithEmptyObstaclesSholdReturnTrue()

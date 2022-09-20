@@ -2,7 +2,7 @@
 {
     public class Plateau
     {
-        public int NumPlateauCorners{ get; private set; }
+        protected int NumPlateauCorners{ get; private set; }
         protected List<int> PlateauCornersCoordinates { get; private set; }
         protected List<string[]> Obstacle { get; private set; } //structure {{ Obstacle Type, Coordinate X, Coordinate Y }, { Obstacle Type, Coordinate X, Coordinate Y }, etc}
 
