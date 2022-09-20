@@ -21,8 +21,20 @@ public class PlateauTests
     }
 
     [Test]
-    public void CheckCoordinatesWithEmptyObstaclesSholdReturnTrun()
+    public void CheckCoordinatesWithEmptyObstaclesSholdReturnTrue()
     {
-        _plateau.IsEmptyPos(0,0).Should().Be(true);
+        _plateau.IsEmptyPos(0, 0).Should().Be(true);
+    }
+
+    [Test]
+    public void GivenCoordinatesOfAPointNotOnThePlateausBoundaryShouldReturnFalse()
+    {
+        _plateau.IsBoundaryPos(1, 1).Should().Be(false);
+    }
+
+    [Test]
+    public void GivenCoordinatesOfAPointOnThePlateausBoundaryShouldReturnTrue()
+    {
+        _plateau.IsBoundaryPos(1, 0).Should().Be(true);
     }
 }
