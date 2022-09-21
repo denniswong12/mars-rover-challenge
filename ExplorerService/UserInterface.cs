@@ -26,5 +26,18 @@ namespace ExplorerService
                 return Int32.Parse(numVehiclesStr);
             return 0;
         }
+
+        public int[] GetVehicleInitPos(string vehicleNum, string vehicleType)
+        {
+            Console.WriteLine($"Please enter the coordinates of the {vehicleNum} {vehicleType} in the format of \"x y\":");
+            var vehiclePCoordinates = Console.ReadLine();
+            if (!String.IsNullOrEmpty(vehiclePCoordinates))
+            {
+                string[] vehicleCoordinatesStr = vehiclePCoordinates.Split(' ');
+                int[] vehicleCoordinatesInt = new int[] { Int32.Parse(vehicleCoordinatesStr[0]), Int32.Parse(vehicleCoordinatesStr[1]) };
+                return vehicleCoordinatesInt;
+            }
+            return new int[] { -1, -1 };
+        }
     }
 }
