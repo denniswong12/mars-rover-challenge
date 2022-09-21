@@ -1,10 +1,11 @@
 ﻿using System;
 namespace ExplorerService
 {
-    public class MarsRover : Vehicle
+    public class IVehicle
     {
-        public MarsRover()
+        public IVehicle()
         {
         }
     }
 }
+
