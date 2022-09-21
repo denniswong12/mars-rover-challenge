@@ -7,7 +7,7 @@ public class PlateauTests
     [SetUp]
     public void Setup()
     {
-        List<int> plateauCornersCoordinates = new List<int> { 0, 0, 0, 6, 6, 6, 6, 0 };
+        List<int> plateauCornersCoordinates = new List<int> { 0, 0, 0, 5, 5, 5, 5, 0 };
         _plateau = new Plateau(4, plateauCornersCoordinates);
     }
 
@@ -48,11 +48,11 @@ public class PlateauTests
         _plateau.IsBoundaryPos(x, y).Should().Be(false);
     }
 
-    [TestCase(0, 6)]
-    [TestCase(1, 6)]
-    [TestCase(6, 3)]
+    [TestCase(0, 5)]
+    [TestCase(1, 5)]
+    [TestCase(5, 3)]
     [TestCase(0, 0)]
-    [TestCase(6, 6)]
+    [TestCase(5, 5)]
     public void Given_Coordinates_Of_A_Point_On_The_Plateaus_Boundary_Should_Return_True(int x, int y)
     {
         _plateau.IsBoundaryPos(x, y).Should().Be(true);

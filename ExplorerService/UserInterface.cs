@@ -18,9 +18,10 @@ namespace ExplorerService
                 return new int[] { 0,0 };
         }
 
-        public int GeNumtVehicle(string vehicleType, int PlateauCornersCoordinateX)
+        public int GeNumtVehicle(string vehicleType, int PlateauCornersCoordinateX, int PlateauCornersCoordinateY)
         {
-            int maxNumVehicle = PlateauCornersCoordinateX * PlateauCornersCoordinateX;
+            //Assume Plateau is a rectangle
+            int maxNumVehicle = PlateauCornersCoordinateX * PlateauCornersCoordinateY;
             Console.WriteLine($"Please enter the number of {vehicleType}, please note that the maximum number of {vehicleType} is {maxNumVehicle} due to the limitation of the Plateau's size.");
             var numVehiclesStr = Console.ReadLine();
             if (!String.IsNullOrEmpty(numVehiclesStr))
@@ -67,6 +68,5 @@ namespace ExplorerService
         {
             Console.WriteLine(marsRoverPosAndFacing);
         }
-        
     }
 }
