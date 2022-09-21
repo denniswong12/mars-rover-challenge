@@ -52,5 +52,15 @@ namespace ExplorerService
             else
                 return "Invalid Facing";
         }
+
+        public string GetVehicleMovement(string vehicleNum, string vehicleType)
+        {
+            Console.WriteLine($"Please enter the instruction(s) to move the {vehicleNum} {vehicleType}:");
+            var vehicleMoveIns = Console.ReadLine();
+            if (!String.IsNullOrEmpty(vehicleMoveIns))
+                return vehicleMoveIns;
+            else
+                return "Invalid Instruction to Move";
+        }
     }
 }

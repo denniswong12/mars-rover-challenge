@@ -43,4 +43,15 @@ public class UserInterfaceTests
         Console.SetIn(new StringReader("N"));
         _userInterface.GetVehicleInitFacing("1st", "Mars Rover").Should().Be("N");
     }
+
+    [TestCase("L")]
+    [TestCase("LMLMLMLMM")]
+    [TestCase("MMRMMRMRRM")]
+    public void Given_User_Input_For_Vehicle_Moving_Instructions_Should_Return_The_Same_Moving_Instructions(string moveInstructions)
+    {
+        Console.SetIn(new StringReader(moveInstructions));
+        _userInterface.GetVehicleMovement("1st", "Mars Rover").Should().Be(moveInstructions);
+    }
+
+
 }
