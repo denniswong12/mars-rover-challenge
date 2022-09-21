@@ -62,5 +62,11 @@ namespace ExplorerService
             else
                 return "Invalid Instruction to Move";
         }
+
+        public void DisplayVehiclePosAndFacing(string marsRoverPosAndFacing)
+        {
+            Console.WriteLine(marsRoverPosAndFacing);
+        }
+        
     }
 }

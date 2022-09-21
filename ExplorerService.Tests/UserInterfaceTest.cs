@@ -53,5 +53,12 @@ public class UserInterfaceTests
         _userInterface.GetVehicleMovement("1st", "Mars Rover").Should().Be(moveInstructions);
     }
 
-
+    [Test]
+    public void Caller_Pass_In_Vehicles_Information_Should_Display_The_Same_On_Console()
+    {
+        var stringWriter = new StringWriter();
+        Console.SetOut(stringWriter);
+        _userInterface.DisplayVehiclePosAndFacing("1 3 N\n5 1 E");
+        Assert.That(stringWriter.ToString(), Is.EqualTo($"1 3 N\n5 1 E\n"));
+    }
 }
