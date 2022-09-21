@@ -17,14 +17,13 @@ namespace ExplorerService
             return new int[] { 0,0 };
         }
 
-        public int GeNumtVehicle(string vehicleType)
+        public int GeNumtVehicle(string vehicleType, int PlateauCornersCoordinateX)
         {
-            Console.WriteLine($"Please enter the number of {vehicleType}:");
+            int maxNumVehicle = PlateauCornersCoordinateX * PlateauCornersCoordinateX;
+            Console.WriteLine($"Please enter the number of {vehicleType}, please note that the maximum number of {vehicleType} is {maxNumVehicle} due to the limitation of the Plateau's size.");
             var numVehiclesStr = Console.ReadLine();
             if (!String.IsNullOrEmpty(numVehiclesStr))
-            {
                 return Int32.Parse(numVehiclesStr);
-            }
             return 0;
         }
     }

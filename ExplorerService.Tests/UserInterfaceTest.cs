@@ -23,7 +23,8 @@ public class UserInterfaceTests
     public void Get_User_Input_Of_The_Number_Of_Vehicles_Should_Return_2()
     {
         var vehicleTypeNum = "2";
+        var PlateauCornersCoordinateX = 5;
         Console.SetIn(new StringReader(vehicleTypeNum));
-        _userInterface.GeNumtVehicle("Mars Rover(s)").Should().Be(2);
+        _userInterface.GeNumtVehicle("Mars Rover(s)", PlateauCornersCoordinateX).Should().Be(2);
     }
 }
