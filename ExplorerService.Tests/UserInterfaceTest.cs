@@ -26,7 +26,7 @@ public class UserInterfaceTests
         var PlateauCornersCoordinateX = 5;
         var PlateauCornersCoordinateY = 5;
         Console.SetIn(new StringReader(vehicleTypeNum));
-        _userInterface.GeNumtVehicle("Mars Rover(s)", PlateauCornersCoordinateX, PlateauCornersCoordinateY).Should().Be(2);
+        _userInterface.GetNumVehicle("Mars Rover(s)", PlateauCornersCoordinateX, PlateauCornersCoordinateY).Should().Be(2);
     }
 
     [Test]

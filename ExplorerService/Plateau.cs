@@ -4,7 +4,7 @@ namespace ExplorerService
 {
     public class Plateau
     {
-        protected int NumPlateauCorners{ get; private set; }
+        public int NumPlateauCorners{ get; private set; }
         protected List<int> PlateauCornersCoordinates { get; private set; }
         protected List<string[]> Obstacle { get; private set; } //structure: {{ Obstacle Type, Coordinate X, Coordinate Y }, { Obstacle Type, Coordinate X, Coordinate Y }, etc}
 
@@ -37,7 +37,7 @@ namespace ExplorerService
             Obstacle.Remove(new string[] { obstacleType, x.ToString(), y.ToString() });
         }
 
-        public bool IsBoundaryPos(int x, int y)
+        public bool IsOutOfBoundaryPos(int x, int y)
         {
             int maxX = 0;
             int maxY = 0;
@@ -56,7 +56,7 @@ namespace ExplorerService
                 if (maxY < eachCornersCoordinates[i, 1]) maxY = eachCornersCoordinates[i, 1];
             }
 
-            if ( x == minX || y == minY || x == maxX || y == maxY ) return true;
+            if (x < minX || y < minY || x > maxX || y > maxY) return true;
             return false;
         }
     }

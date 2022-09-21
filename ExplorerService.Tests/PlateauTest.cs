@@ -45,16 +45,16 @@ public class PlateauTests
     [TestCase(1, 4)]
     public void Given_Coordinates_Of_A_Point_Not_On_The_Plateaus_Boundary_Should_Return_False(int x, int y)
     {
-        _plateau.IsBoundaryPos(x, y).Should().Be(false);
+        _plateau.IsOutOfBoundaryPos(x, y).Should().Be(false);
     }
 
-    [TestCase(0, 5)]
-    [TestCase(1, 5)]
-    [TestCase(5, 3)]
-    [TestCase(0, 0)]
-    [TestCase(5, 5)]
+    [TestCase(0, 6)]
+    [TestCase(1, 6)]
+    [TestCase(6, 3)]
+    [TestCase(-1, 0)]
+    [TestCase(7, 5)]
     public void Given_Coordinates_Of_A_Point_On_The_Plateaus_Boundary_Should_Return_True(int x, int y)
     {
-        _plateau.IsBoundaryPos(x, y).Should().Be(true);
+        _plateau.IsOutOfBoundaryPos(x, y).Should().Be(true);
     }    
 }

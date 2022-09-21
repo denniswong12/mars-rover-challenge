@@ -6,7 +6,7 @@ namespace ExplorerService
     {
         public int[] GetPlateauCornersCoordinates()
         {
-            Console.WriteLine("Please enter the upper right hand corner coordinates of the Plateau:");
+            Console.WriteLine("Please enter the upper right hand corner coordinates of the Plateau in the format \"x y\":");
             var plateauMaxCoordinates = Console.ReadLine();
             if (!String.IsNullOrEmpty(plateauMaxCoordinates))
             {
@@ -18,7 +18,7 @@ namespace ExplorerService
                 return new int[] { 0,0 };
         }
 
-        public int GeNumtVehicle(string vehicleType, int PlateauCornersCoordinateX, int PlateauCornersCoordinateY)
+        public int GetNumVehicle(string vehicleType, int PlateauCornersCoordinateX, int PlateauCornersCoordinateY)
         {
             //Assume Plateau is a rectangle
             int maxNumVehicle = PlateauCornersCoordinateX * PlateauCornersCoordinateY;
