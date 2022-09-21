@@ -21,5 +21,10 @@
         {
             return VehicleID;
         }
+
+        public string GetCurrentPosAndFacing()
+        {
+            return $"{PosX} {PosY} {Facing}";
+        }
     }
 }
