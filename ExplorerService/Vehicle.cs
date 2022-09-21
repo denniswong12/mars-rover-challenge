@@ -26,5 +26,44 @@
         {
             return $"{PosX} {PosY} {Facing}";
         }
+
+        public void SpinsLeft()
+        {
+            switch(Facing)
+            { 
+                case "E":
+                    Facing = "N";
+                    break;
+                case "N":
+                    Facing = "W";
+                    break;
+                case "W":
+                    Facing = "S";
+                    break;
+                case "S":
+                    Facing = "E";
+                    break;
+            }
+        }
+
+        public void SpinsRight()
+        {
+            switch (Facing)
+            {
+                case "E":
+                    Facing = "S";
+                    break;
+                case "S":
+                    Facing = "W";
+                    break;
+                case "W":
+                    Facing = "N";
+                    break;
+                case "N":
+                    Facing = "E";
+                    break;
+            }
+        }
+        
     }
 }
