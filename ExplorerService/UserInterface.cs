@@ -14,7 +14,8 @@ namespace ExplorerService
                 int[] plateauCoordinates = new int[] { Int32.Parse(plateauCoordinatesStr[0]), Int32.Parse(plateauCoordinatesStr[1]) };
                 return plateauCoordinates;
             }
-            return new int[] { 0,0 };
+            else
+                return new int[] { 0,0 };
         }
 
         public int GeNumtVehicle(string vehicleType, int PlateauCornersCoordinateX)
@@ -24,20 +25,32 @@ namespace ExplorerService
             var numVehiclesStr = Console.ReadLine();
             if (!String.IsNullOrEmpty(numVehiclesStr))
                 return Int32.Parse(numVehiclesStr);
-            return 0;
+            else
+                return 0;
         }
 
         public int[] GetVehicleInitPos(string vehicleNum, string vehicleType)
         {
             Console.WriteLine($"Please enter the coordinates of the {vehicleNum} {vehicleType} in the format of \"x y\":");
-            var vehiclePCoordinates = Console.ReadLine();
-            if (!String.IsNullOrEmpty(vehiclePCoordinates))
+            var vehicleCoordinates = Console.ReadLine();
+            if (!String.IsNullOrEmpty(vehicleCoordinates))
             {
-                string[] vehicleCoordinatesStr = vehiclePCoordinates.Split(' ');
+                string[] vehicleCoordinatesStr = vehicleCoordinates.Split(' ');
                 int[] vehicleCoordinatesInt = new int[] { Int32.Parse(vehicleCoordinatesStr[0]), Int32.Parse(vehicleCoordinatesStr[1]) };
                 return vehicleCoordinatesInt;
             }
-            return new int[] { -1, -1 };
+            else
+                return new int[] { -1, -1 };
+        }
+
+        public string GetVehicleInitFacing(string vehicleNum, string vehicleType)
+        {
+            Console.WriteLine($"Please enter the facing of the {vehicleNum} {vehicleType}:");
+            var vehicleFacing= Console.ReadLine();
+            if (!String.IsNullOrEmpty(vehicleFacing))
+                return vehicleFacing;
+            else
+                return "Invalid Facing";
         }
     }
 }

@@ -36,4 +36,11 @@ public class UserInterfaceTests
         Console.SetIn(new StringReader(vehicleInitCoordinates));
         CollectionAssert.AreEqual(expectedCoordinates, _userInterface.GetVehicleInitPos("1st", "Mars Rover"));
     }
+
+    [Test]
+    public void Given_User_Input_N_Of_The_Initial_Facing_Of_A_Vehicles_Should_Return_N()
+    {
+        Console.SetIn(new StringReader("N"));
+        _userInterface.GetVehicleInitFacing("1st", "Mars Rover").Should().Be("N");
+    }
 }
