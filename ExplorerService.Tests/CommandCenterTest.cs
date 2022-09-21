@@ -9,4 +9,12 @@ public class CommandCenterTests
     {
         _commandCenter = new CommandCenter();
     }
+
+    [Test]
+    public void Calling_InitEnvironment_Should_Initiate_A_Plateau()
+    {
+        _commandCenter.InitEnvironment();
+        Console.SetIn(new StringReader("5 5"));
+        _commandCenter.GetNumPlateauCorners().Should().Be(4);
+    }
 }
