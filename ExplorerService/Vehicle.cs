@@ -2,26 +2,24 @@
 {
     public class Vehicle : IVehicle
     {
-        public bool IsAsleep { get; private set; }
-        public int AverageHeight { get; private set; }
-        public string Setting { get; private set; }
+        public int PosX { get; private set; }
+        public int PosY { get; private set; }
+        public string Facing { get; private set; }
+        public string VehicleID { get; private set; }
+        public string VehicleType { get; private set; }
 
-        protected Vehicle(int averageHeight, string setting)
+        public Vehicle(int x, int y, string facing, string vehicleID, string vehicleType)
         {
-            AverageHeight = averageHeight;
-            Setting = setting;
+            PosX = x;
+            PosY = y;
+            Facing = facing;
+            VehicleID = vehicleID;
+            VehicleType = vehicleType;
         }
 
-        public abstract string Eat();
-
-        public void GoToSleep()
+        public string GetVehicleID()
         {
-            IsAsleep = true;
-        }
-
-        public void WakeUp()
-        {
-            IsAsleep = false;
+            return VehicleID;
         }
     }
 }

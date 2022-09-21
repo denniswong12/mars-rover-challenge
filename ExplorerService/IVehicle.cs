@@ -1,11 +1,13 @@
-﻿using System;
-namespace ExplorerService
+﻿namespace ExplorerService
 {
-    public class IVehicle
+    public interface IVehicle
     {
-        public IVehicle()
-        {
-        }
+        public string GetVehicleID();
+
+        public int PosX { get; }
+        public int PosY { get; }
+        public string Facing { get; }
+        public string VehicleID { get; }
+        public string VehicleType { get; }
     }
 }
-
