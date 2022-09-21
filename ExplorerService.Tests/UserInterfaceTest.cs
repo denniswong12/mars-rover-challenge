@@ -11,8 +11,11 @@ public class UserInterfaceTests
     }
 
     [Test]
-    public void Test1()
+    public void Get_User_Input_Of_The_Plateau_Corner_Coordinates_Should_Return_int_array_5_5()
     {
-        Assert.Pass();
+        var plateauCornerCoordinates = "5 5";
+        int[] expectedCoordinates = new int[] { 5, 5 };
+        Console.SetIn(new StringReader(plateauCornerCoordinates));
+        CollectionAssert.AreEqual(expectedCoordinates, _userInterface.GetPlateauCornersCoordinates());
     }
 }

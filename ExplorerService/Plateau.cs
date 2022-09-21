@@ -10,9 +10,9 @@ namespace ExplorerService
 
         public Plateau(int numPlateauCorners, List<int> plateauCornersCoordinates)
         {
+            Obstacle = new List<string[]>();
             NumPlateauCorners = numPlateauCorners;
             PlateauCornersCoordinates = plateauCornersCoordinates;
-            Obstacle = new List<string[]>();
         }
 
         public bool IsEmptyPos(int x, int y)
@@ -51,7 +51,7 @@ namespace ExplorerService
             {
                 eachCornersCoordinates[i, 0] = PlateauCornersCoordinates[i * numCoordinates];
                 eachCornersCoordinates[i, 1] = PlateauCornersCoordinates[i * numCoordinates + 1];
-                //Assume Plateau is rectangle
+                //Assume Plateau is a rectangle
                 if (maxX < eachCornersCoordinates[i, 0]) maxX = eachCornersCoordinates[i, 0];
                 if (maxY < eachCornersCoordinates[i, 1]) maxY = eachCornersCoordinates[i, 1];
             }
