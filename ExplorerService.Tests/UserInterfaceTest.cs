@@ -18,4 +18,12 @@ public class UserInterfaceTests
         Console.SetIn(new StringReader(plateauCornerCoordinates));
         CollectionAssert.AreEqual(expectedCoordinates, _userInterface.GetPlateauCornersCoordinates());
     }
+
+    [Test]
+    public void Get_User_Input_Of_The_Number_Of_Vehicles_Should_Return_2()
+    {
+        var vehicleTypeNum = "2";
+        Console.SetIn(new StringReader(vehicleTypeNum));
+        _userInterface.GeNumtVehicle("Mars Rover(s)").Should().Be(2);
+    }
 }
