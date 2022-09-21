@@ -35,4 +35,11 @@ public class MarsRoverTests
         _marsRover.SpinsRight();
         _marsRover.GetCurrentPosAndFacing().Should().Be("3 1 W");
     }
+
+    [Test]
+    public void Given_Instruction_MoveForward_The_Vehicle_Should_Move_One_Step_Forward()
+    {
+        _marsRover.MoveOneStepForward();
+        _marsRover.GetCurrentPosAndFacing().Should().Be("3 0 S");
+    }
 }

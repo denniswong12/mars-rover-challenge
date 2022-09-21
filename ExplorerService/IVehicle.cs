@@ -3,11 +3,14 @@
     public interface IVehicle
     {
         public string GetVehicleID();
-
-        public int PosX { get; }
-        public int PosY { get; }
-        public string Facing { get; }
-        public string VehicleID { get; }
-        public string VehicleType { get; }
+        public string GetCurrentPosAndFacing();
+        public void SpinsLeft();
+        public void SpinsRight();
+        public void MoveOneStepForward();
+        public void SetVehicleID(string vehicleID);
+        public void MoveSidewayLeft();
+        public void MoveSidewayRight();
+        public void MoveBackward();
+        public void Fly();
     }
 }
