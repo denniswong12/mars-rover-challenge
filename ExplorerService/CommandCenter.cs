@@ -13,21 +13,18 @@
             _plateauMaxCoordinates = _userInterface.GetPlateauCornersCoordinates();
             List<int> plateauCorners = new List<int> { 0, 0, _plateauMaxCoordinates[0], 0, _plateauMaxCoordinates[0], _plateauMaxCoordinates[1], 0, _plateauMaxCoordinates[1] };
             int numPlateauCorners = plateauCorners.Count() / _numCorrdinates;
-
             _plateau = new Plateau(numPlateauCorners, plateauCorners);
         }
 
         public void AddVehicle(string vehicleType)
         {
             int numVehicle = _userInterface.GetNumVehicle(vehicleType, _plateauMaxCoordinates[0], _plateauMaxCoordinates[1]);
-
             for (int i = 0; i < numVehicle; i++)
             {
                 int[] vehicleInitPos = _userInterface.GetVehicleInitPos(AddOrdinal(i + 1), vehicleType);
                 string vehicleInitFacing = _userInterface.GetVehicleInitFacing(AddOrdinal(i + 1), vehicleType);
 
                 _listMarsRovers.Add(new MarsRover(vehicleInitPos[0], vehicleInitPos[1], vehicleInitFacing, $"MR{i}", vehicleType));
-
                 ManageVehicleAction(i, vehicleType);
             }
         }

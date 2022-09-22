@@ -8,31 +8,114 @@ public class CommandCenterTests
     public void Setup()
     {
         _commandCenter = new CommandCenter();
-        //Can't test after changing ListMarsRovers to private in CommandCenter.cs
-        //_commandCenter._listMarsRovers.Add(new MarsRover(3, 4, "N", $"MR0", "Mars Rover"));
     }
 
     [Test]
     public void Calling_InitEnvironment_Should_Initiate_A_Plateau()
     {
-        _commandCenter.InitEnvironment();
-        Console.SetIn(new StringReader("5 5"));
-        _commandCenter.GetNumPlateauCorners().Should().Be(4);
+        using (StreamReader inputs = new StreamReader("../../../../inputs/testInitPlateau.csv"))
+        {
+            Console.SetIn(inputs);
+            _commandCenter.InitEnvironment();
+            Console.ReadLine();
+            _commandCenter.GetNumPlateauCorners().Should().Be(4);
+        }
     }
 
-    /*
-        [Test]
-        public void Calling_MoveVehicle_Given_Instruction_L_Should_Spins_The_Vehicle_Left()
+    [Test]
+    public void Calling_AddVehicle_Should_Add_A_Vehicle_To_The_Plateau()
+    {
+        using (StreamReader inputs = new StreamReader("../../../../inputs/testAddVehicle.csv"))
         {
-            _commandCenter.MoveVehicle(0, "Mars Rover", "L");
-            _commandCenter._listMarsRovers[0].GetCurrentPosAndFacing().Should().Be("3 4 W");
-        }
+            Console.SetIn(inputs);
+            _commandCenter.InitEnvironment();
+            Console.ReadLine();
+            _commandCenter.AddVehicle("Mars Rover");
+            Console.ReadLine();
+            Console.ReadLine();
+            Console.ReadLine();
+            Console.ReadLine();
 
-        [Test]
-        public void Calling_MoveVehicle_Given_Instruction_R_Should_Spins_The_Vehicle_Right()
-        {
-            _commandCenter.MoveVehicle(0, "Mars Rover", "R");
-            _commandCenter._listMarsRovers[0].GetCurrentPosAndFacing().Should().Be("3 4 E");
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+
+            _commandCenter.DisplayAllVehiclePos("Mars Rover");
+
+            var output = stringWriter.ToString();
+            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\n3 3 N\n"));
+            
         }
-    */
+    }
+
+    [Test]
+    public void Calling_AddVehicle_With_Input_Of_Movement_Instructions_Should_Move_The_Vehicle()
+    {
+        using (StreamReader inputs = new StreamReader("../../../../inputs/testMove.csv"))
+        { 
+            Console.SetIn(inputs);
+            _commandCenter.InitEnvironment();
+            Console.ReadLine();
+            _commandCenter.AddVehicle("Mars Rover");
+            Console.ReadLine();
+            Console.ReadLine();
+            Console.ReadLine();
+            Console.ReadLine();
+
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+
+            _commandCenter.DisplayAllVehiclePos("Mars Rover");
+
+            var output = stringWriter.ToString();
+            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\n1 3 N\n"));
+        }
+    }
+
+    [Test]
+    public void Calling_AddVehicle_With_Input_Of_Movement_Instructions_Trying_To_Move_Out_Of_The_Plateau_Should_Stop_At_The_Boundary()
+    {
+        using (StreamReader inputs = new StreamReader("../../../../inputs/testBoundary.csv"))
+        {
+            Console.SetIn(inputs);
+            _commandCenter.InitEnvironment();
+            Console.ReadLine();
+            _commandCenter.AddVehicle("Mars Rover");
+            Console.ReadLine();
+            Console.ReadLine();
+            Console.ReadLine();
+            Console.ReadLine();
+
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+
+            _commandCenter.DisplayAllVehiclePos("Mars Rover");
+
+            var output = stringWriter.ToString();
+            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\n2 1 E\n"));
+        }
+    }
+
+    [Test]
+    public void Adding_Two_Vehicles_And_Trying_To_Move_Into_One_Another_Should_Stop_In_Front_Of_The_Vehicle()
+    {
+        using (StreamReader inputs = new StreamReader("../../../../inputs/testObstacle.csv"))
+        {
+            Console.SetIn(inputs);
+            _commandCenter.InitEnvironment();
+            Console.ReadLine();
+            _commandCenter.AddVehicle("Mars Rover");
+            Console.ReadLine();
+            Console.ReadLine();
+            Console.ReadLine();
+            Console.ReadLine();
+
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+
+            _commandCenter.DisplayAllVehiclePos("Mars Rover");
+
+            var output = stringWriter.ToString();
+            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\n3 1 E\n3 2 S\n"));
+        }
+    }
 }
