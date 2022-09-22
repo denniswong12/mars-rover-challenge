@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ExplorerService
+﻿namespace ExplorerService
 {
     public class UserInterface
     {
