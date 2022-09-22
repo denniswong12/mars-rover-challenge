@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace ExplorerService
+﻿namespace ExplorerService
 {
     public class Plateau
     {

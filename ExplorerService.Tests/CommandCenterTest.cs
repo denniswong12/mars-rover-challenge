@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestPlatform.Utilities;
-
-namespace ExplorerService.Tests;
+﻿namespace ExplorerService.Tests;
 
 public class CommandCenterTests
 {

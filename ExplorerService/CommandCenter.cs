@@ -1,7 +1,4 @@
-﻿using System.IO;
-using static System.Reflection.Metadata.BlobBuilder;
-
-namespace ExplorerService
+﻿namespace ExplorerService
 {
     public class CommandCenter
     {
@@ -9,7 +6,7 @@ namespace ExplorerService
         private const int _numCorrdinates = 2;
         private UserInterface _userInterface = new UserInterface();
         private int[] _plateauMaxCoordinates = new int[_numCorrdinates];
-        private List<MarsRover> ListMarsRovers = new List<MarsRover>();
+        private List<MarsRover> _listMarsRovers = new List<MarsRover>();
 
         public void InitEnvironment()
         {
@@ -29,7 +26,7 @@ namespace ExplorerService
                 int[] vehicleInitPos = _userInterface.GetVehicleInitPos(AddOrdinal(i + 1), vehicleType);
                 string vehicleInitFacing = _userInterface.GetVehicleInitFacing(AddOrdinal(i + 1), vehicleType);
 
-                ListMarsRovers.Add(new MarsRover(vehicleInitPos[0], vehicleInitPos[1], vehicleInitFacing, $"MR{i}", vehicleType));
+                _listMarsRovers.Add(new MarsRover(vehicleInitPos[0], vehicleInitPos[1], vehicleInitFacing, $"MR{i}", vehicleType));
 
                 ManageVehicleAction(i, vehicleType);
             }
@@ -48,13 +45,13 @@ namespace ExplorerService
                 switch (singleMoveIns)
                 {
                     case 'L':
-                        ListMarsRovers[vehicleNum].SpinsLeft();
+                        _listMarsRovers[vehicleNum].SpinsLeft();
                         break;
                     case 'R':
-                        ListMarsRovers[vehicleNum].SpinsRight();
+                        _listMarsRovers[vehicleNum].SpinsRight();
                         break;
                     case 'M':
-                        string marsRoverPosFacing = ListMarsRovers[vehicleNum].GetCurrentPosAndFacing();
+                        string marsRoverPosFacing = _listMarsRovers[vehicleNum].GetCurrentPosAndFacing();
                         int newX = marsRoverPosFacing[0] - '0'; //"-'0'" to change char to int
                         int newY = marsRoverPosFacing[2] - '0';
 
@@ -79,7 +76,7 @@ namespace ExplorerService
                             if (!_plateau.IsOutOfBoundaryPos(newX, newY))
                             {
                                 _plateau.RemoveObstacle(vehicleType, marsRoverPosFacing[0] - '0', marsRoverPosFacing[2] - '0');
-                                ListMarsRovers[vehicleNum].MoveOneStepForward();
+                                _listMarsRovers[vehicleNum].MoveOneStepForward();
                                 _plateau.AddObstacle(vehicleType, newX, newY);
                             }
                         }
@@ -91,7 +88,7 @@ namespace ExplorerService
         public void DisplayAllVehiclePos(string vehicleType)
         {
             Console.WriteLine($"\nThe {vehicleType} coordinates and facing are:");
-            foreach (MarsRover marsRover in ListMarsRovers)
+            foreach (MarsRover marsRover in _listMarsRovers)
             {
                 Console.WriteLine(marsRover.GetCurrentPosAndFacing());
             }
