@@ -34,7 +34,11 @@ namespace ExplorerService
 
         public void RemoveObstacle(string obstacleType, int x, int y)
         {
-            Obstacle.Remove(new string[] { obstacleType, x.ToString(), y.ToString() });
+            for (int i=0; i<Obstacle.Count; i++)
+            {
+                if (Obstacle[i][0]==obstacleType && Obstacle[i][1]==x.ToString() && Obstacle[i][2]==y.ToString())
+                    Obstacle.RemoveAt(i);
+            }
         }
 
         public bool IsOutOfBoundaryPos(int x, int y)
@@ -56,8 +60,7 @@ namespace ExplorerService
                 if (maxY < eachCornersCoordinates[i, 1]) maxY = eachCornersCoordinates[i, 1];
             }
 
-            if (x < minX || y < minY || x > maxX || y > maxY) return true;
-            return false;
+            return (x < minX || y < minY || x > maxX || y > maxY);
         }
     }
 }

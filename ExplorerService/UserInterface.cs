@@ -46,7 +46,7 @@ namespace ExplorerService
 
         public string GetVehicleInitFacing(string vehicleNum, string vehicleType)
         {
-            Console.WriteLine($"Please enter the facing of the {vehicleNum} {vehicleType}:");
+            Console.WriteLine($"Please enter the facing of the {vehicleNum} {vehicleType} (e.g. N for North, E for East, S for South, W for West):");
             var vehicleFacing= Console.ReadLine();
             if (!String.IsNullOrEmpty(vehicleFacing))
                 return vehicleFacing;
@@ -56,7 +56,7 @@ namespace ExplorerService
 
         public string GetVehicleMovement(string vehicleNum, string vehicleType)
         {
-            Console.WriteLine($"Please enter the instruction(s) to move the {vehicleNum} {vehicleType}:");
+            Console.WriteLine($"Please enter the instruction(s) to move the {vehicleNum} {vehicleType}, L for spins left, R for spins right, M for move forward  (e.g. LMRMMLLM). The {vehicleType} will stop and ignore the rest of the instruction(s) when it try to move to an obstacle or try to move out of the Plateau:");
             var vehicleMoveIns = Console.ReadLine();
             if (!String.IsNullOrEmpty(vehicleMoveIns))
                 return vehicleMoveIns;
