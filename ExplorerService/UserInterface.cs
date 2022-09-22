@@ -11,8 +11,7 @@ namespace ExplorerService
             if (!String.IsNullOrEmpty(plateauMaxCoordinates))
             {
                 string[] plateauCoordinatesStr = plateauMaxCoordinates.Split(' ');
-                int[] plateauCoordinates = new int[] { Int32.Parse(plateauCoordinatesStr[0]), Int32.Parse(plateauCoordinatesStr[1]) };
-                return plateauCoordinates;
+                return (new int[] { Int32.Parse(plateauCoordinatesStr[0]), Int32.Parse(plateauCoordinatesStr[1]) });
             }
             else
                 return new int[] { 0,0 };
@@ -37,8 +36,7 @@ namespace ExplorerService
             if (!String.IsNullOrEmpty(vehicleCoordinates))
             {
                 string[] vehicleCoordinatesStr = vehicleCoordinates.Split(' ');
-                int[] vehicleCoordinatesInt = new int[] { Int32.Parse(vehicleCoordinatesStr[0]), Int32.Parse(vehicleCoordinatesStr[1]) };
-                return vehicleCoordinatesInt;
+                return (new int[] { Int32.Parse(vehicleCoordinatesStr[0]), Int32.Parse(vehicleCoordinatesStr[1]) });
             }
             else
                 return new int[] { -1, -1 };

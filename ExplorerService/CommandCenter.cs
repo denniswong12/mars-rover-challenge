@@ -10,7 +10,7 @@ namespace ExplorerService
         private UserInterface _userInterface = new UserInterface();
 
         private int[] _plateauMaxCoordinates = new int[numCorrdinates];
-        public List<MarsRover> ListMarsRovers = new List<MarsRover>();
+        private List<MarsRover> ListMarsRovers = new List<MarsRover>();
 
         public void InitEnvironment()
         {
@@ -59,7 +59,7 @@ namespace ExplorerService
                         break;
                     case 'M':
                         string marsRoverPosFacing = ListMarsRovers[vehicleNum].GetCurrentPosAndFacing();
-                        int newX = marsRoverPosFacing[0] - '0';
+                        int newX = marsRoverPosFacing[0] - '0'; //"-'0'" to change char to int
                         int newY = marsRoverPosFacing[2] - '0';
 
                         switch (marsRoverPosFacing[4])
@@ -89,6 +89,15 @@ namespace ExplorerService
                         }
                         break;
                 }
+            }
+        }
+
+        public void DisplayAllVehiclePos(string vehicleType)
+        {
+            Console.WriteLine($"\nThe {vehicleType} coordinates and facing are:");
+            foreach (MarsRover marsRover in ListMarsRovers)
+            {
+                Console.WriteLine(marsRover.GetCurrentPosAndFacing());
             }
         }
 
