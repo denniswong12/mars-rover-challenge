@@ -2,9 +2,18 @@
 {
     public class UserInterface
     {
+        public void DisplayIntro()
+        {
+            Console.WriteLine("Please note the following when entering information:");
+            Console.WriteLine("- All coordinates should be entered in the format \"x y\".");
+            Console.WriteLine("- Due to the limitation of the Plateau's size, there is a maximum number of vehicle can be put on to the Plateau.");
+            Console.WriteLine("- Only one character is needed when entering facing of a vehicle: N for North, E for East, S for South and W for West.");
+            Console.WriteLine("- Instructions to move the vehicle are: L for spins left, R for spins right, M for move forward  (e.g. LMRMMLLM). The vehicle will stop and ignore the rest of the instruction(s) when it try to move to an obstacle or try to move outside of the Plateau.\n");
+        }
+
         public int[] GetPlateauCornersCoordinates()
         {
-            Console.WriteLine("Please enter the upper right hand corner coordinates of the Plateau in the format \"x y\":");
+            Console.WriteLine("Please enter the upper right hand corner coordinates of the Plateau:");
             var plateauMaxCoordinates = Console.ReadLine();
             if (!(plateauMaxCoordinates==null))
             {
@@ -14,7 +23,7 @@
                 
                 while (plateauCoordinatesStr.Count() != 2 || !(Int32.TryParse(plateauCoordinatesStr[0], out plateauMaxX)) || plateauMaxX < 0 || !(Int32.TryParse(plateauCoordinatesStr[1], out plateauMaxY)) || plateauMaxY < 0)
                 {
-                    Console.WriteLine("Please enter the upper right hand corner coordinates of the Plateau in the format \"x y\":");
+                    Console.WriteLine("Please enter the upper right hand corner coordinates of the Plateau:");
                     plateauMaxCoordinates = Console.ReadLine();
                     if (!(plateauMaxCoordinates == null))
                         plateauCoordinatesStr = plateauMaxCoordinates.Split(' ');
@@ -29,14 +38,14 @@
         {
             //Assume Plateau is a rectangle
             int maxNumVehicle = PlateauCornersCoordinateX * PlateauCornersCoordinateY;
-            Console.WriteLine($"Please enter the number of {vehicleType}, please note that the maximum number of {vehicleType} is {maxNumVehicle} due to the limitation of the Plateau's size.");
+            Console.WriteLine($"Please enter the number of {vehicleType} with maximum {maxNumVehicle}.");
             var numVehiclesStr = Console.ReadLine();
             if (!(numVehiclesStr == null))
             {
                 int numVehicles = 0;
                 while (!(Int32.TryParse(numVehiclesStr, out numVehicles)) || numVehicles < 0)
                 {
-                    Console.WriteLine($"Please enter the number of {vehicleType}, please note that the maximum number of {vehicleType} is {maxNumVehicle} due to the limitation of the Plateau's size.");
+                    Console.WriteLine($"Please enter the number of {vehicleType}with maximum {maxNumVehicle}.");
                     numVehiclesStr = Console.ReadLine();
                 }
                 return numVehicles;
@@ -47,7 +56,7 @@
 
         public int[] GetVehicleInitPos(string vehicleNum, string vehicleType)
         {
-            Console.WriteLine($"Please enter the coordinates of the {vehicleNum} {vehicleType} in the format of \"x y\":");
+            Console.WriteLine($"Please enter the coordinates of the {vehicleNum} {vehicleType}:");
             var vehicleCoordinates = Console.ReadLine();
             if (!(vehicleCoordinates == null))
             {
@@ -57,7 +66,7 @@
 
                 while (vehicleCoordinatesStr.Count() != 2 || !(Int32.TryParse(vehicleCoordinatesStr[0], out vehicleCoordinateX)) || vehicleCoordinateX < 0 || !(Int32.TryParse(vehicleCoordinatesStr[1], out vehicleCoordinateY)) || vehicleCoordinateY < 0)
                 {
-                    Console.WriteLine($"Please enter the coordinates of the {vehicleNum} {vehicleType} in the format of \"x y\":");
+                    Console.WriteLine($"Please enter the coordinates of the {vehicleNum} {vehicleType}:");
                     vehicleCoordinates = Console.ReadLine();
                     if (!(vehicleCoordinates == null))
                         vehicleCoordinatesStr = vehicleCoordinates.Split(' ');
@@ -70,14 +79,14 @@
 
         public string GetVehicleInitFacing(string vehicleNum, string vehicleType)
         {
-            Console.WriteLine($"Please enter the facing of the {vehicleNum} {vehicleType} (e.g. N for North, E for East, S for South, W for West):");
+            Console.WriteLine($"Please enter the facing of the {vehicleNum} {vehicleType} (e.g. N, E, S, W):");
             var vehicleFacing= Console.ReadLine();
             if (!(vehicleFacing == null))
             {
                 vehicleFacing = vehicleFacing.ToUpper();
                 while ( !(vehicleFacing=="N" || vehicleFacing=="E" || vehicleFacing=="S" || vehicleFacing=="W") )
                 {
-                    Console.WriteLine($"Please enter the facing of the {vehicleNum} {vehicleType} (e.g. N for North, E for East, S for South, W for West):");
+                    Console.WriteLine($"Please enter the facing of the {vehicleNum} {vehicleType} (e.g. N, E, S, W):");
                     vehicleFacing = Console.ReadLine();
                     if (!(vehicleFacing == null))
                         vehicleFacing = vehicleFacing.ToUpper();
@@ -90,14 +99,14 @@
 
         public string GetVehicleMovement(string vehicleNum, string vehicleType)
         {
-            Console.WriteLine($"Please enter the instruction(s) to move the {vehicleNum} {vehicleType}, L for spins left, R for spins right, M for move forward  (e.g. LMRMMLLM). The {vehicleType} will stop and ignore the rest of the instruction(s) when it try to move to an obstacle or try to move out of the Plateau:");
+            Console.WriteLine($"Please enter the instruction(s) to move the {vehicleNum} {vehicleType} (e.g. LMRMMLLM):");
             var vehicleMoveIns = Console.ReadLine();
             if (!(vehicleMoveIns == null))
             {
                 vehicleMoveIns = vehicleMoveIns.ToUpper();
                 while (!(ValidateMoveInstruction(vehicleMoveIns)))
                 {
-                    Console.WriteLine($"Please enter the instruction(s) to move the {vehicleNum} {vehicleType}, L for spins left, R for spins right, M for move forward  (e.g. LMRMMLLM). The {vehicleType} will stop and ignore the rest of the instruction(s) when it try to move to an obstacle or try to move out of the Plateau:");
+                    Console.WriteLine($"Please enter the instruction(s) to move the {vehicleNum} {vehicleType} (e.g. LMRMMLLM):");
                     vehicleMoveIns = Console.ReadLine();
                     if (!(vehicleMoveIns == null))
                         vehicleMoveIns = vehicleMoveIns.ToUpper();

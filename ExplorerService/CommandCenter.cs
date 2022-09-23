@@ -10,6 +10,7 @@
 
         public void InitEnvironment()
         {
+            _userInterface.DisplayIntro();
             _plateauMaxCoordinates = _userInterface.GetPlateauCornersCoordinates();
             List<int> plateauCorners = new List<int> { 0, 0, _plateauMaxCoordinates[0], 0, _plateauMaxCoordinates[0], _plateauMaxCoordinates[1], 0, _plateauMaxCoordinates[1] };
             int numPlateauCorners = plateauCorners.Count() / _numCorrdinates;
