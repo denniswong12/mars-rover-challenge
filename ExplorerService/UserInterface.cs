@@ -5,7 +5,7 @@
         public void DisplayIntro()
         {
             Console.WriteLine("Please note the following when entering information:");
-            Console.WriteLine("- All coordinates should be entered in the format \"x y\".");
+            Console.WriteLine("- All coordinates should be entered in the format \"x y\" where x and y are integers.");
             Console.WriteLine("- The lower left hand corner of the Plateau is (0,0), each coordinate of the upper right hand corner of the Plateau must be > or = 0.");
             Console.WriteLine("- The initial position of a vehicle must be within the Plateau.");
             Console.WriteLine("- Due to the limitation of the Plateau's size, there is a maximum number of vehicle can be put on to the Plateau.");
@@ -81,14 +81,14 @@
 
         public string GetVehicleInitFacing(string vehicleNum, string vehicleType)
         {
-            Console.WriteLine($"Please enter the facing of the {vehicleNum} {vehicleType} (e.g. N, E, S, W):");
+            Console.WriteLine($"Please enter the facing of the {vehicleNum} {vehicleType} (N/E/S/W):");
             var vehicleFacing= Console.ReadLine();
             if (vehicleFacing != null)
             {
                 vehicleFacing = vehicleFacing.ToUpper();
                 while ( !(vehicleFacing=="N" || vehicleFacing=="E" || vehicleFacing=="S" || vehicleFacing=="W") )
                 {
-                    Console.WriteLine($"Please enter the facing of the {vehicleNum} {vehicleType} (e.g. N, E, S, W):");
+                    Console.WriteLine($"Please enter the facing of the {vehicleNum} {vehicleType} (N/E/S/W):");
                     vehicleFacing = Console.ReadLine();
                     if (vehicleFacing != null)
                         vehicleFacing = vehicleFacing.ToUpper();
