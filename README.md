@@ -3,7 +3,7 @@
 - In this system, the surface of Mars is represented by a rectangular Plateau, starting from coordinate (0,0), following the x-axis and y-axis, user can define the size of it by entering the coordinate of the upper right hand corner of the Plateau.
 - On the Plateau, user can choose to randomly place some rocks, some unknown obstacles or even some aliens!
 - User can also add some Mars Rovers onto the Plateau, remember those Rovers can’t overlap with each other and of course not over the obstacles. The Rovers can’t be put outside of the Plateau as well.
-- When adding the Rovers, user need to specify the coordinate and the facing of it. The facing can be marked by 
+- When adding the Rovers, user need to specify the coordinate and the facing of it. The facing can be marked by:
     - N : North
     - E : East
     - S : South
@@ -16,7 +16,7 @@
 - After moving all Rovers, the system will show the location of each Rover.
 - Different Rovers navigate the Plateau so they can use their special cameras and robot arms to collect samples back to Planet Earth.
 
-## PWhat’s in this System
+## What’s in this System
 
 The system is written in C#, with git as version control and store the source codes in GitHub - https://github.com/denniswong12/mars-rover-challenge.git. Design using UML Class Diagram with 5 classes and 1 interface. The interface and the classes and their features are:
 
