@@ -23,6 +23,8 @@
             for (int i = 0; i < numVehicle; i++)
             {
                 int[] vehicleInitPos = _userInterface.GetVehicleInitPos(AddOrdinal(i + 1), vehicleType);
+                while (_plateau.IsOutOfBoundaryPos(vehicleInitPos[0], vehicleInitPos[1]) || !_plateau.IsEmptyPos(vehicleInitPos[0], vehicleInitPos[1]))
+                    vehicleInitPos = _userInterface.GetVehicleInitPos(AddOrdinal(i + 1), vehicleType);
                 string vehicleInitFacing = _userInterface.GetVehicleInitFacing(AddOrdinal(i + 1), vehicleType);
 
                 _listMarsRovers.Add(new MarsRover(vehicleInitPos[0], vehicleInitPos[1], vehicleInitFacing, $"MR{i}", vehicleType));

@@ -7,6 +7,7 @@
             Console.WriteLine("Please note the following when entering information:");
             Console.WriteLine("- All coordinates should be entered in the format \"x y\".");
             Console.WriteLine("- The lower left hand corner of the Plateau is (0,0), each coordinate of the upper right hand corner of the Plateau must be > or = 0.");
+            Console.WriteLine("- The initial position of a vehicle must be within the Plateau.");
             Console.WriteLine("- Due to the limitation of the Plateau's size, there is a maximum number of vehicle can be put on to the Plateau.");
             Console.WriteLine("- Only one character is needed when entering facing of a vehicle: N for North, E for East, S for South and W for West.");
             Console.WriteLine("- Instructions to move the vehicle are: L for spins left, R for spins right, M for move forward  (e.g. LMRMMLLM). The vehicle will stop and ignore the rest of the instruction(s) when it try to move to an obstacle or try to move outside of the Plateau.\n");
