@@ -25,6 +25,7 @@
                 
                 while (plateauCoordinatesStr.Count() != 2 || !(Int32.TryParse(plateauCoordinatesStr[0], out plateauMaxX)) || plateauMaxX < 0 || !(Int32.TryParse(plateauCoordinatesStr[1], out plateauMaxY)) || plateauMaxY < 0)
                 {
+                    UserErrInput();
                     Console.WriteLine("Please enter the upper right hand corner coordinates of the Plateau:");
                     plateauMaxCoordinates = Console.ReadLine();
                     if (plateauMaxCoordinates != null)
@@ -47,7 +48,8 @@
                 int numVehicles = 0;
                 while (!(Int32.TryParse(numVehiclesStr, out numVehicles)) || numVehicles < 0 || numVehicles > maxNumVehicle)
                 {
-                    Console.WriteLine($"Please enter the number of {vehicleType}with maximum {maxNumVehicle}.");
+                    UserErrInput();
+                    Console.WriteLine($"Please enter the number of {vehicleType} with maximum {maxNumVehicle}.");
                     numVehiclesStr = Console.ReadLine();
                 }
                 return numVehicles;
@@ -68,6 +70,7 @@
 
                 while (vehicleCoordinatesStr.Count() != 2 || !(Int32.TryParse(vehicleCoordinatesStr[0], out vehicleCoordinateX)) || vehicleCoordinateX < 0 || !(Int32.TryParse(vehicleCoordinatesStr[1], out vehicleCoordinateY)) || vehicleCoordinateY < 0)
                 {
+                    UserErrInput();
                     Console.WriteLine($"Please enter the coordinates of the {vehicleNum} {vehicleType}:");
                     vehicleCoordinates = Console.ReadLine();
                     if (vehicleCoordinates != null)
@@ -88,6 +91,7 @@
                 vehicleFacing = vehicleFacing.ToUpper();
                 while ( !(vehicleFacing=="N" || vehicleFacing=="E" || vehicleFacing=="S" || vehicleFacing=="W") )
                 {
+                    UserErrInput();
                     Console.WriteLine($"Please enter the facing of the {vehicleNum} {vehicleType} (N/E/S/W):");
                     vehicleFacing = Console.ReadLine();
                     if (vehicleFacing != null)
@@ -108,6 +112,7 @@
                 vehicleMoveIns = vehicleMoveIns.ToUpper();
                 while (!(ValidateMoveInstruction(vehicleMoveIns)))
                 {
+                    UserErrInput();
                     Console.WriteLine($"Please enter the instruction(s) to move the {vehicleNum} {vehicleType} (e.g. LMRMMLLM):");
                     vehicleMoveIns = Console.ReadLine();
                     if (vehicleMoveIns != null)
@@ -134,6 +139,11 @@
         public void DisplayVehiclePosAndFacing(string marsRoverPosAndFacing)
         {
             Console.WriteLine(marsRoverPosAndFacing);
+        }
+
+        private void UserErrInput()
+        {
+            Console.WriteLine("Invalid input, please enter again.");
         }
     }
 }
