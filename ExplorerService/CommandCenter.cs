@@ -3,6 +3,7 @@
     public class CommandCenter
     {
         private Plateau _plateau;
+        private int _minPlateauSizeHasObstacles = 8;
         private const int _numCorrdinates = 2;
         private UserInterface _userInterface = new UserInterface();
         private int[] _plateauMaxCoordinates = new int[_numCorrdinates];
@@ -17,7 +18,30 @@
             _plateau = new Plateau(numPlateauCorners, plateauCorners, _plateauMaxCoordinates);
         }
 
+        public void AddObstacles(string obstacleType)
+        {
+            if (_plateau.PlateauSize() > _minPlateauSizeHasObstacles && _userInterface.GetGenerateObstacle(obstacleType))
+            {
+                int obstacleX = 0;
+                int obstacleY = 0;
+                float maxObstaclesRatio = 0.2f;
+                Random rnd = new Random();
+                int numobstacle = 0;
 
+                while (numobstacle <= 0)
+                    numobstacle = rnd.Next((int)(_plateau.PlateauSize() * maxObstaclesRatio));
+                    
+                for (int i=0; i< numobstacle; i++)
+                {
+                    while (!(_plateau.IsEmptyPos(obstacleX, obstacleY)))
+                    {
+                        obstacleX = rnd.Next(_plateauMaxCoordinates[0]);
+                        obstacleY = rnd.Next(_plateauMaxCoordinates[1]);
+                    }
+                    _plateau.AddObstacle(obstacleType, obstacleX, obstacleY);
+                }
+            }
+        }
 
         public void AddVehicle(string vehicleType)
         {
@@ -89,29 +113,30 @@
 
         public void DisplayAllVehiclePos(string vehicleType)
         {
-/* draw output
-            var horizontalLine = "";
-            var verticleLine = "|";
-
-            Console.WriteLine($"\nThe {vehicleType} coordinates and facing are:");
-
-            for (int i = 0; i < _plateauMaxCoordinates[0]; i++)
-                horizontalLine += "-";
-            Console.WriteLine(horizontalLine);
-            for (int i = 0; i < _plateauMaxCoordinates[0]; i++)
-            {
-                if (i != 3)
-                    verticleLine += " | ";
-                else
-                    verticleLine += " MR ";
-            }
-            Console.WriteLine(verticleLine);
-*/
-            Console.WriteLine($"\nThe {vehicleType} coordinates and facing are:");
+            string disVehicles = $"\nThe {vehicleType} coordinates and facing are:\n";
             foreach (MarsRover marsRover in _listMarsRovers)
             {
-                //String.Format("|{0,5}|{1,5}|{2,5}|{3,5}|", arg0, arg1, arg2, arg3);
-                Console.WriteLine(marsRover.GetCurrentPosAndFacing());
+                disVehicles += $"{vehicleType}: {marsRover.GetCurrentPosAndFacing()}\n";
+            }
+            _userInterface.DisplayToConsole(disVehicles);
+        }
+
+        public void DisplayAllObstaclePos()
+        {
+            List<string[]> obstacle = _plateau.RetrieveObstacles();
+            if (obstacle.Count() > 0)
+            {
+                string disObstacles = $"\nThe coordinates of the obstacles are:\n";
+                for (int i = 0; i < obstacle.Count(); i++)
+                {
+                    if (obstacle[i][0] != "Mars Rover")
+                        disObstacles += $"{obstacle[i][0]}: {obstacle[i][1]} {obstacle[i][2]}\n";
+                }
+                _userInterface.DisplayToConsole(disObstacles);
+            }
+            else if (_plateau.PlateauSize() > _minPlateauSizeHasObstacles)
+            {
+                _userInterface.DisplayToConsole("There no obstacles generated.");
             }
         }
 

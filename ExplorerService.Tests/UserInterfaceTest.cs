@@ -67,7 +67,7 @@ public class UserInterfaceTests
     public void Given_User_Input_Y_To_Have_Some_Obstacles_Should_Return_True_To_Caller()
     {
         Console.SetIn(new StringReader("Y"));
-        _userInterface.GetGenerateObstacle().Should().Be(true);
+        _userInterface.GetGenerateObstacle("Alien").Should().Be(true);
     }
 
     [Test]
@@ -75,7 +75,7 @@ public class UserInterfaceTests
     {
         var stringWriter = new StringWriter();
         Console.SetOut(stringWriter);
-        _userInterface.DisplayObstaclesPosAndType("Rock 1 3 N\nAliens 5 1 E");
+        _userInterface.DisplayToConsole("Rock 1 3 N\nAliens 5 1 E");
         Assert.That(stringWriter.ToString(), Is.EqualTo($"Rock 1 3 N\nAliens 5 1 E\n"));
     }
 }

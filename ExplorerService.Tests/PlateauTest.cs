@@ -62,6 +62,6 @@ public class PlateauTests
     [Test]
     public void Get_Plateau_Size_Should_Return_Its_Size()
     {
-        _plateau.PlateauSize().Should().Be(30);
+        _plateau.PlateauSize().Should().Be(42);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace ExplorerService.Tests;
+﻿using System.Numerics;
+
+namespace ExplorerService.Tests;
 
 public class CommandCenterTests
 {
@@ -42,7 +44,7 @@ public class CommandCenterTests
             _commandCenter.DisplayAllVehiclePos("Mars Rover");
 
             var output = stringWriter.ToString();
-            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\n3 3 N\n"));
+            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\nMars Rover: 3 3 N\n\n"));
             
         }
     }
@@ -67,7 +69,7 @@ public class CommandCenterTests
             _commandCenter.DisplayAllVehiclePos("Mars Rover");
 
             var output = stringWriter.ToString();
-            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\n1 3 N\n"));
+            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\nMars Rover: 1 3 N\n\n"));
         }
     }
 
@@ -91,7 +93,7 @@ public class CommandCenterTests
             _commandCenter.DisplayAllVehiclePos("Mars Rover");
 
             var output = stringWriter.ToString();
-            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\n2 1 E\n"));
+            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\nMars Rover: 2 1 E\n\n"));
         }
     }
 
@@ -115,7 +117,54 @@ public class CommandCenterTests
             _commandCenter.DisplayAllVehiclePos("Mars Rover");
 
             var output = stringWriter.ToString();
-            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\n3 1 E\n3 2 S\n"));
+            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\nMars Rover: 3 1 E\nMars Rover: 3 2 S\n\n"));
+        }
+    }
+
+    [Test]
+    public void Calling_AddObstacles_To_Add_Some_Alien_Should_Be_Able_To_Add_Some_Aliens()
+    {
+        using (StreamReader inputs = new StreamReader("../../../../inputs/testAlien.csv"))
+        {
+            Console.SetIn(inputs);
+            _commandCenter.InitEnvironment();
+            Console.ReadLine();
+            _commandCenter.AddObstacles("Aliens");
+            Console.ReadLine();
+
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+
+            _commandCenter.DisplayAllObstaclePos();
+
+            var output = stringWriter.ToString();
+            Assert.IsTrue(output.Contains("The coordinates of the obstacles are:\nAliens:"));
+        }
+    }
+
+    [Test]
+    public void A_Plateau_With_Size_Less_Than_8_Should_Not_Ask_User_To_Add_Obstacle()
+    {
+        using (StreamReader inputs = new StreamReader("../../../../inputs/testPlasteauSmallerThan8.csv"))
+        {
+            Console.SetIn(inputs);
+            _commandCenter.InitEnvironment();
+            Console.ReadLine();
+            _commandCenter.AddObstacles("Aliens");
+            _commandCenter.DisplayAllObstaclePos();
+            _commandCenter.AddVehicle("Mars Rover");
+            Console.ReadLine();
+            Console.ReadLine();
+            Console.ReadLine();
+            Console.ReadLine();
+
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+
+            //_commandCenter.DisplayAllVehiclePos("Mars Rover");
+
+            var output = stringWriter.ToString();
+            Assert.IsFalse(output.Contains("Are there any Aliens on the Plateau? (Y/N)"));
         }
     }
 }

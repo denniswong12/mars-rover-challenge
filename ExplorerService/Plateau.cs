@@ -29,7 +29,12 @@
 
         public int PlateauSize()
         {
-            return (PlateauMaxCoordinates[0] * PlateauMaxCoordinates[1]);
+            return ((PlateauMaxCoordinates[0]+1) * (PlateauMaxCoordinates[1]+1));
+        }
+
+        public List<string[]> RetrieveObstacles()
+        {
+            return Obstacle;
         }
 
         public void AddObstacle(string obstacleType, int x, int y)

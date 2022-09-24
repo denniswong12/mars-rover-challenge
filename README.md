@@ -1,7 +1,7 @@
 # Mars Explorers Control System
 
 - In this system, the surface of Mars is represented by a rectangular Plateau, starting from coordinate (0,0), following the x-axis and y-axis, user can define the size of it by entering the coordinate of the upper right hand corner of the Plateau.
-- On the Plateau, user can choose to randomly place some rocks, some unknown obstacles or even some aliens!
+- On the Plateau with size bigger than 8, user can choose to randomly place some rocks and some aliens!
 - User can also add some Mars Rovers onto the Plateau, remember those Rovers can’t overlap with each other and of course not over the obstacles. The Rovers can’t be put outside of the Plateau as well.
 - When adding the Rovers, user need to specify the coordinate and the facing of it. The facing can be marked by:
     - N : North
@@ -55,6 +55,50 @@ Subclass - MarsRover:
 
 - This system is a Console application, can run using Visual Studio with .Net6.0+
 - Example of the user interface:
+
+Please note the following when entering information:
+- All coordinates should be entered in the format "x y" where x and y are integers.
+- The lower left hand corner of the Plateau is (0,0), each coordinate of the upper right hand corner of the Plateau must be > or = 0.
+- You can have some Aliens or Rocks on the Plateau with the Plateau size > 8.
+- The initial position of a vehicle must be within the Plateau.
+- Due to the limitation of the Plateau's size, there is a maximum number of vehicle can be put on to the Plateau.
+- Only one character is needed when entering facing of a vehicle: N for North, E for East, S for South and W for West.
+- Instructions to move the vehicle are: L for spins left, R for spins right, M for move forward  (e.g. LMRMMLLM).
+  The vehicle will stop and ignore the rest of the instruction(s) when it try to move to an obstacle or try to move outside of the Plateau.
+
+Please enter the upper right hand corner coordinates of the Plateau:
+3 5
+Are there any Aliens on the Plateau? (Y/N):
+Y
+Are there any Rocks on the Plateau? (Y/N):
+Y
+
+The coordinates of the obstacles are:
+Aliens: 0 0
+Aliens: 2 1
+Rocks: 1 0
+
+Please enter the number of Mars Rover with maximum 24.
+2
+Please enter the coordinates of the 1st Mars Rover:
+2 3
+Please enter the facing of the 1st Mars Rover (N/E/S/W):
+E
+Please enter the instruction(s) to move the 1st Mars Rover (e.g. LMRMMLLM):
+LMMRMMM
+Please enter the coordinates of the 2nd Mars Rover:
+1 2
+Please enter the facing of the 2nd Mars Rover (N/E/S/W):
+A
+Invalid input, please enter again.
+Please enter the facing of the 2nd Mars Rover (N/E/S/W):
+W
+Please enter the instruction(s) to move the 2nd Mars Rover (e.g. LMRMMLLM):
+MMRMMLMR
+
+The Mars Rover coordinates and facing are:
+Mars Rover: 3 5 E
+Mars Rover: 0 4 N
 
 ## Development framework
 - The system was developed using Test Driven Development framework, starting from the simplest test cases with Arrange, Act and Assert approach to implement the classes. All test cases were starting from a fail case, then write the code to get the case pass and then refactor the code.

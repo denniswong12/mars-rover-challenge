@@ -7,6 +7,7 @@
             Console.WriteLine("Please note the following when entering information:");
             Console.WriteLine("- All coordinates should be entered in the format \"x y\" where x and y are integers.");
             Console.WriteLine("- The lower left hand corner of the Plateau is (0,0), each coordinate of the upper right hand corner of the Plateau must be > or = 0.");
+            Console.WriteLine("- You can have some Aliens or Rocks on the Plateau with the Plateau size > 8.");
             Console.WriteLine("- The initial position of a vehicle must be within the Plateau.");
             Console.WriteLine("- Due to the limitation of the Plateau's size, there is a maximum number of vehicle can be put on to the Plateau.");
             Console.WriteLine("- Only one character is needed when entering facing of a vehicle: N for North, E for East, S for South and W for West.");
@@ -137,9 +138,9 @@
              return true;
         }
 
-        public bool GetGenerateObstacle()
+        public bool GetGenerateObstacle(string obstacleType)
         {
-            Console.WriteLine($"Are there any obstacles on the Plateau? (Y/N):");
+            Console.WriteLine($"Are there any {obstacleType} on the Plateau? (Y/N):");
             var hasObstacles = Console.ReadLine();
             if (hasObstacles != null)
             {
@@ -147,7 +148,7 @@
                 while (!(hasObstacles == "N" || hasObstacles == "Y"))
                 {
                     UserErrInput();
-                    Console.WriteLine($"Are there any obstacles on the Plateau? (Y/N):");
+                    Console.WriteLine($"Are there any {obstacleType} on the Plateau? (Y/N):");
                     hasObstacles = Console.ReadLine();
                     if (hasObstacles != null)
                         hasObstacles = hasObstacles.ToUpper();
@@ -158,7 +159,7 @@
                 return false;
         }
 
-        public void DisplayObstaclesPosAndType(string obstaclesPos)
+        public void DisplayToConsole(string obstaclesPos)
         {
             Console.WriteLine(obstaclesPos);
         }
