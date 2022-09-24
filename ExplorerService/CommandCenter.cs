@@ -45,7 +45,7 @@
 
         public void AddVehicle(string vehicleType)
         {
-            int numVehicle = _userInterface.GetNumVehicle(vehicleType, _plateauMaxCoordinates[0], _plateauMaxCoordinates[1]);
+            int numVehicle = _userInterface.GetNumVehicle(vehicleType, _plateau.PlateauSize());
             for (int i = 0; i < numVehicle; i++)
             {
                 int[] vehicleInitPos = _userInterface.GetVehicleInitPos(AddOrdinal(i + 1), vehicleType);

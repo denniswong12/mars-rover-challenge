@@ -1,7 +1,8 @@
 # Mars Explorers Control System
 
+- This system is a Console application with user input via console and display results onto the console.
 - In this system, the surface of Mars is represented by a rectangular Plateau, starting from coordinate (0,0), following the x-axis and y-axis, user can define the size of it by entering the coordinate of the upper right hand corner of the Plateau.
-- On the Plateau with size bigger than 8, user can choose to randomly place some rocks and some aliens!
+- Aliens and Rocks can exist for Plateau with size bigger than 8, beware!
 - User can also add some Mars Rovers onto the Plateau, remember those Rovers can’t overlap with each other and of course not over the obstacles. The Rovers can’t be put outside of the Plateau as well.
 - When adding the Rovers, user need to specify the coordinate and the facing of it. The facing can be marked by:
     - N : North
@@ -22,12 +23,15 @@ The system is written in C#, with git as version control and store the source co
 
 Class - CommandCenter:
 - Initialise the plateau.
-- Call Plateau to add vehicle onto the plateau.
+- Call Plateau to add obstacles and vehicles onto the plateau.
+- Store a list of vehicle objects.
 - Trigger vehicle to move.
 - Request display vehicle positions.
 
 Class - UserInterface:
 - Get plateau coordinates from user via console input.
+- Ask user whether there are some Aliens or Rocks on the plateau.
+- Display coordinates of all obstacles (if any) on console.
 - Get vehicle coordinates and facing from user via console input.
 - Get vehicle movement instructions from user via console input.
 - Display coordinates and facing of all vehicles on console.
@@ -36,6 +40,7 @@ Class - Plateau:
 - Instantiate the plateau object.
 - Check the given coordinates is free of obstacle or not.
 - Check the given coordinates is out of the boundary of the plateau or not.
+- Return the size of the Plateau to the caller.
 - Add obstacle/vehicle on the plateau.
 - Remove obstacle/vehicle from the plateau.
 
@@ -56,6 +61,7 @@ Subclass - MarsRover:
 - This system is a Console application, can run using Visual Studio with .Net6.0+
 - Example of the user interface:
 
+***************
 Please note the following when entering information:
 - All coordinates should be entered in the format "x y" where x and y are integers.
 - The lower left hand corner of the Plateau is (0,0), each coordinate of the upper right hand corner of the Plateau must be > or = 0.
@@ -99,6 +105,7 @@ MMRMMLMR
 The Mars Rover coordinates and facing are:
 Mars Rover: 3 5 E
 Mars Rover: 0 4 N
+***************
 
 ## Development framework
 - The system was developed using Test Driven Development framework, starting from the simplest test cases with Arrange, Act and Assert approach to implement the classes. All test cases were starting from a fail case, then write the code to get the case pass and then refactor the code.

@@ -27,11 +27,8 @@
                 
                 while (plateauCoordinatesStr.Count() != 2 || !(Int32.TryParse(plateauCoordinatesStr[0], out plateauMaxX)) || plateauMaxX < 0 || !(Int32.TryParse(plateauCoordinatesStr[1], out plateauMaxY)) || plateauMaxY < 0)
                 {
-                    UserErrInput();
-                    Console.WriteLine("Please enter the upper right hand corner coordinates of the Plateau:");
-                    plateauMaxCoordinates = Console.ReadLine();
-                    if (plateauMaxCoordinates != null)
-                        plateauCoordinatesStr = plateauMaxCoordinates.Split(' ');
+                    plateauMaxCoordinates = ReInputData($"Please enter the upper right hand corner coordinates of the Plateau:");
+                    plateauCoordinatesStr = plateauMaxCoordinates.Split(' ');
                 }
                 return (new int[] { plateauMaxX, plateauMaxY });
             }
@@ -39,10 +36,9 @@
                 return new int[] { -1, -1 };
         }
 
-        public int GetNumVehicle(string vehicleType, int PlateauCornersCoordinateX, int PlateauCornersCoordinateY)
+        public int GetNumVehicle(string vehicleType, int maxNumVehicle)
         {
             //Assume Plateau is a rectangle
-            int maxNumVehicle = (PlateauCornersCoordinateX+1) * (PlateauCornersCoordinateY+1);
             Console.WriteLine($"Please enter the number of {vehicleType} with maximum {maxNumVehicle}.");
             var numVehiclesStr = Console.ReadLine();
             if (numVehiclesStr != null)
@@ -72,11 +68,8 @@
 
                 while (vehicleCoordinatesStr.Count() != 2 || !(Int32.TryParse(vehicleCoordinatesStr[0], out vehicleCoordinateX)) || vehicleCoordinateX < 0 || !(Int32.TryParse(vehicleCoordinatesStr[1], out vehicleCoordinateY)) || vehicleCoordinateY < 0)
                 {
-                    UserErrInput();
-                    Console.WriteLine($"Please enter the coordinates of the {vehicleNum} {vehicleType}:");
-                    vehicleCoordinates = Console.ReadLine();
-                    if (vehicleCoordinates != null)
-                        vehicleCoordinatesStr = vehicleCoordinates.Split(' ');
+                    vehicleCoordinates = ReInputData($"Please enter the coordinates of the {vehicleNum} {vehicleType}:");
+                    vehicleCoordinatesStr = vehicleCoordinates.Split(' ');
                 }
                 return (new int[] { vehicleCoordinateX, vehicleCoordinateY });
             }
@@ -92,13 +85,7 @@
             {
                 vehicleFacing = vehicleFacing.ToUpper();
                 while ( !(vehicleFacing=="N" || vehicleFacing=="E" || vehicleFacing=="S" || vehicleFacing=="W") )
-                {
-                    UserErrInput();
-                    Console.WriteLine($"Please enter the facing of the {vehicleNum} {vehicleType} (N/E/S/W):");
-                    vehicleFacing = Console.ReadLine();
-                    if (vehicleFacing != null)
-                        vehicleFacing = vehicleFacing.ToUpper();
-                }
+                    vehicleFacing = ReInputData($"Please enter the facing of the {vehicleNum} {vehicleType} (N/E/S/W):");
                 return vehicleFacing;
             }
             else
@@ -113,13 +100,7 @@
             {
                 vehicleMoveIns = vehicleMoveIns.ToUpper();
                 while (!(ValidateMoveInstruction(vehicleMoveIns)))
-                {
-                    UserErrInput();
-                    Console.WriteLine($"Please enter the instruction(s) to move the {vehicleNum} {vehicleType} (e.g. LMRMMLLM):");
-                    vehicleMoveIns = Console.ReadLine();
-                    if (vehicleMoveIns != null)
-                        vehicleMoveIns = vehicleMoveIns.ToUpper();
-                }
+                    vehicleMoveIns = ReInputData($"Please enter the instruction(s) to move the {vehicleNum} {vehicleType} (e.g. LMRMMLLM):");
                 return vehicleMoveIns;
             }
             else
@@ -146,17 +127,18 @@
             {
                 hasObstacles = hasObstacles.ToUpper();
                 while (!(hasObstacles == "N" || hasObstacles == "Y"))
-                {
-                    UserErrInput();
-                    Console.WriteLine($"Are there any {obstacleType} on the Plateau? (Y/N):");
-                    hasObstacles = Console.ReadLine();
-                    if (hasObstacles != null)
-                        hasObstacles = hasObstacles.ToUpper();
-                }
+                    hasObstacles = ReInputData($"Are there any {obstacleType} on the Plateau? (Y/N):");
                 return (hasObstacles=="Y");
             }
             else
                 return false;
+        }
+
+        public string ReInputData(string msgToConsole)
+        {
+            UserErrInput();
+            Console.WriteLine(msgToConsole);
+            return (Console.ReadLine().ToUpper());
         }
 
         public void DisplayToConsole(string obstaclesPos)
