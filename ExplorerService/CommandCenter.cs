@@ -51,7 +51,7 @@
                 int[] vehicleInitPos = _userInterface.GetVehicleInitPos(AddOrdinal(i + 1), vehicleType);
                 while (_plateau.IsOutOfBoundaryPos(vehicleInitPos[0], vehicleInitPos[1]) || !_plateau.IsEmptyPos(vehicleInitPos[0], vehicleInitPos[1]))
                 {
-                    Console.WriteLine($"The input coordinates is not empty or is out of the Plateau.");
+                    _userInterface.DisplayToConsole($"The input coordinates is not empty or is out of the Plateau.");
                     vehicleInitPos = _userInterface.GetVehicleInitPos(AddOrdinal(i + 1), vehicleType);
                 }
                 string vehicleInitFacing = _userInterface.GetVehicleInitFacing(AddOrdinal(i + 1), vehicleType);
@@ -112,13 +112,13 @@
                             }
                             else
                             {
-                                Console.WriteLine($"Stopped {vehicleType} at {marsRoverPosFacing[0] - '0'} {marsRoverPosFacing[2] - '0'} to avoid moving out of the Plateau.");
+                                _userInterface.DisplayToConsole($"Stopped {vehicleType} at {marsRoverPosFacing[0] - '0'} {marsRoverPosFacing[2] - '0'} to avoid moving out of the Plateau.");
                                 exitForeach = true;
                             }
                         }
                         else
                         {
-                            Console.WriteLine($"Stopped {vehicleType} at {marsRoverPosFacing[0] - '0'} {marsRoverPosFacing[2] - '0'} to avoid collision.");
+                            _userInterface.DisplayToConsole($"Stopped {vehicleType} at {marsRoverPosFacing[0] - '0'} {marsRoverPosFacing[2] - '0'} to avoid collision.");
                             exitForeach = true;
                         }
                         break;

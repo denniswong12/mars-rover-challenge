@@ -70,7 +70,7 @@ Please note the following when entering information:
 - Due to the limitation of the Plateau's size, there is a maximum number of vehicle can be put on to the Plateau.
 - Only one character is needed when entering facing of a vehicle: N for North, E for East, S for South and W for West.
 - Instructions to move the vehicle are: L for spins left, R for spins right, M for move forward  (e.g. LMRMMLLM).
-  The vehicle will stop and ignore the rest of the instruction(s) when it try to move to an obstacle or try to move outside of the Plateau.
+  The vehicle will skip the  and ignore the rest of the instruction(s) when it try to move to an obstacle or try to move outside of the Plateau.
 
 Please enter the upper right hand corner coordinates of the Plateau:
 3 5
@@ -129,14 +129,16 @@ How to test
 ## What's Next?
 
 With some modifications, it is possible to add the following features to the system:
-- User can add Obstacles.
+- User can add other types of Obstacles.
+    - How to implement: In ExplorerService.cs, add commandCenter.AddObstacles("New Obstacle Type"); after commandCenter.AddObstacles("Rocks");
 - Rover acknowledge after receiving an instruction.
     - How to implement: Modify class Vehicle and return acknowledgment after receiving any instructions.
-- Rover able to move backward/sidewards.
-    - How to implement: Modify class UserInterface to accept user input of backward/sidewards instructions, modify class CommandCenter to verify those new instructions as valid input and modify class Vehicle to carry out those instructions.
+- Rover able to move fly/backward/sidewards.
+    - How to implement: Modify class UserInterface to accept user input of fly/backward/sidewards instructions, modify class CommandCenter to verify those new instructions as valid input and modify class Vehicle to carry out those instructions.
 - Different shapes of plateau
     - How to implement: Modify class Plateau 
 - Support different types of vehicles.
     - How to implement: Add a new subclass for the new vehicle and inherit from base class Vehicle. 
 - Visual UI.
-- Flying Rover.
+    - How to implement: Modify class UserInterface to draw the Plateau to console.
+

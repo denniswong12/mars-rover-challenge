@@ -141,9 +141,9 @@
             return (Console.ReadLine().ToUpper());
         }
 
-        public void DisplayToConsole(string obstaclesPos)
+        public void DisplayToConsole(string message)
         {
-            Console.WriteLine(obstaclesPos);
+            Console.WriteLine(message);
         }
 
         private void UserErrInput()
