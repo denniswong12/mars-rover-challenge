@@ -7,8 +7,9 @@ public class PlateauTests
     [SetUp]
     public void Setup()
     {
+        int[] plateauMaxCoordinates = { 5, 6 };
         List<int> plateauCornersCoordinates = new List<int> { 0, 0, 0, 5, 5, 5, 5, 0 };
-        _plateau = new Plateau(4, plateauCornersCoordinates);
+        _plateau = new Plateau(4, plateauCornersCoordinates, plateauMaxCoordinates);
     }
 
     /* Not able to test after chaning NumPlateauCorners to "protected"
@@ -56,5 +57,11 @@ public class PlateauTests
     public void Given_Coordinates_Of_A_Point_On_The_Plateaus_Boundary_Should_Return_True(int x, int y)
     {
         _plateau.IsOutOfBoundaryPos(x, y).Should().Be(true);
-    }    
+    }
+
+    [Test]
+    public void Get_Plateau_Size_Should_Return_Its_Size()
+    {
+        _plateau.PlateauSize().Should().Be(30);
+    }
 }

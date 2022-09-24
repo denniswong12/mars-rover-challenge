@@ -3,14 +3,16 @@
     public class Plateau
     {
         public int NumPlateauCorners{ get; private set; }
+        protected int[] PlateauMaxCoordinates { get; private set; }
         protected List<int> PlateauCornersCoordinates { get; private set; }
         protected List<string[]> Obstacle { get; private set; } //structure: {{ Obstacle Type, Coordinate X, Coordinate Y }, { Obstacle Type, Coordinate X, Coordinate Y }, etc}
 
-        public Plateau(int numPlateauCorners, List<int> plateauCornersCoordinates)
+        public Plateau(int numPlateauCorners, List<int> plateauCornersCoordinates, int[] plateauMaxCoordinates)
         {
             Obstacle = new List<string[]>();
             NumPlateauCorners = numPlateauCorners;
             PlateauCornersCoordinates = plateauCornersCoordinates;
+            PlateauMaxCoordinates = plateauMaxCoordinates;
         }
 
         public bool IsEmptyPos(int x, int y)
@@ -23,6 +25,11 @@
                 }
             }
             return true;
+        }
+
+        public int PlateauSize()
+        {
+            return (PlateauMaxCoordinates[0] * PlateauMaxCoordinates[1]);
         }
 
         public void AddObstacle(string obstacleType, int x, int y)
