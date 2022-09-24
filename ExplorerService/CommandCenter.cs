@@ -50,10 +50,14 @@
             {
                 int[] vehicleInitPos = _userInterface.GetVehicleInitPos(AddOrdinal(i + 1), vehicleType);
                 while (_plateau.IsOutOfBoundaryPos(vehicleInitPos[0], vehicleInitPos[1]) || !_plateau.IsEmptyPos(vehicleInitPos[0], vehicleInitPos[1]))
+                {
+                    Console.WriteLine($"The input coordinates is not empty or is out of the Plateau.");
                     vehicleInitPos = _userInterface.GetVehicleInitPos(AddOrdinal(i + 1), vehicleType);
+                }
                 string vehicleInitFacing = _userInterface.GetVehicleInitFacing(AddOrdinal(i + 1), vehicleType);
 
                 _listMarsRovers.Add(new MarsRover(vehicleInitPos[0], vehicleInitPos[1], vehicleInitFacing, $"MR{i}", vehicleType));
+                _plateau.AddObstacle(vehicleType, vehicleInitPos[0], vehicleInitPos[1]);
                 ManageVehicleAction(i, vehicleType);
             }
         }
@@ -105,6 +109,14 @@
                                 _listMarsRovers[vehicleNum].MoveOneStepForward();
                                 _plateau.AddObstacle(vehicleType, newX, newY);
                             }
+                            else
+                            {
+                                Console.WriteLine($"Stopped {vehicleType} at {marsRoverPosFacing[0] - '0'} {marsRoverPosFacing[2] - '0'} to avoid moving out of the Plateau.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Stopped {vehicleType} at {marsRoverPosFacing[0] - '0'} {marsRoverPosFacing[2] - '0'} to avoid collision.");
                         }
                         break;
                 }

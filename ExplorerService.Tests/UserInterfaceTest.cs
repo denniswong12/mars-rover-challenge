@@ -22,11 +22,8 @@ public class UserInterfaceTests
     [Test]
     public void Given_User_Input_2_As_The_Number_Of_Vehicles_Should_Return_2()
     {
-        var vehicleTypeNum = "2";
-        var PlateauCornersCoordinateX = 5;
-        var PlateauCornersCoordinateY = 5;
-        Console.SetIn(new StringReader(vehicleTypeNum));
-        _userInterface.GetNumVehicle("Mars Rover(s)", PlateauCornersCoordinateX, PlateauCornersCoordinateY).Should().Be(2);
+        Console.SetIn(new StringReader("2"));
+        _userInterface.GetNumVehicle("Mars Rover(s)", 36).Should().Be(2);
     }
 
     [Test]

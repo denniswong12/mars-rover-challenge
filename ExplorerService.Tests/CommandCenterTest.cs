@@ -44,7 +44,7 @@ public class CommandCenterTests
             _commandCenter.DisplayAllVehiclePos("Mars Rover");
 
             var output = stringWriter.ToString();
-            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\nMars Rover: 3 3 N\n\n"));
+            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\nMars Rover - MR0: 3 3 N\n\n"));
             
         }
     }
@@ -69,7 +69,7 @@ public class CommandCenterTests
             _commandCenter.DisplayAllVehiclePos("Mars Rover");
 
             var output = stringWriter.ToString();
-            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\nMars Rover: 1 3 N\n\n"));
+            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\nMars Rover - MR0: 1 3 N\n\n"));
         }
     }
 
@@ -93,7 +93,7 @@ public class CommandCenterTests
             _commandCenter.DisplayAllVehiclePos("Mars Rover");
 
             var output = stringWriter.ToString();
-            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\nMars Rover: 2 1 E\n\n"));
+            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\nMars Rover - MR0: 2 1 E\n\n"));
         }
     }
 
@@ -117,7 +117,7 @@ public class CommandCenterTests
             _commandCenter.DisplayAllVehiclePos("Mars Rover");
 
             var output = stringWriter.ToString();
-            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\nMars Rover: 3 1 E\nMars Rover: 3 2 S\n\n"));
+            Assert.That(output, Is.EqualTo("\nThe Mars Rover coordinates and facing are:\nMars Rover - MR0: 3 1 E\nMars Rover - MR1: 3 2 S\n\n"));
         }
     }
 
