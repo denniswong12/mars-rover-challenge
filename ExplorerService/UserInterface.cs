@@ -157,7 +157,11 @@
             else
                 return false;
         }
-        
+
+        public void DisplayObstaclesPosAndType(string obstaclesPos)
+        {
+            Console.WriteLine(obstaclesPos);
+        }
 
         private void UserErrInput()
         {

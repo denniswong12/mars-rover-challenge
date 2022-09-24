@@ -70,12 +70,12 @@ public class UserInterfaceTests
         _userInterface.GetGenerateObstacle().Should().Be(true);
     }
 
-    //[Test]
-    //public void Caller_Pass_In_Obstacles_Information_Should_Display_The_Same_On_Console()
-    //{
-    //    var stringWriter = new StringWriter();
-    //    Console.SetOut(stringWriter);
-    //    _userInterface.DisplayObstaclesPosAndType("Rock 1 3 N\nAliens 5 1 E");
-    //    Assert.That(stringWriter.ToString(), Is.EqualTo($"Rock 1 3 N\nAliens 5 1 E"));
-    //}
+    [Test]
+    public void Caller_Pass_In_Obstacles_Information_Should_Display_The_Same_On_Console()
+    {
+        var stringWriter = new StringWriter();
+        Console.SetOut(stringWriter);
+        _userInterface.DisplayObstaclesPosAndType("Rock 1 3 N\nAliens 5 1 E");
+        Assert.That(stringWriter.ToString(), Is.EqualTo($"Rock 1 3 N\nAliens 5 1 E\n"));
+    }
 }
