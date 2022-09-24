@@ -10,7 +10,8 @@
             Console.WriteLine("- The initial position of a vehicle must be within the Plateau.");
             Console.WriteLine("- Due to the limitation of the Plateau's size, there is a maximum number of vehicle can be put on to the Plateau.");
             Console.WriteLine("- Only one character is needed when entering facing of a vehicle: N for North, E for East, S for South and W for West.");
-            Console.WriteLine("- Instructions to move the vehicle are: L for spins left, R for spins right, M for move forward  (e.g. LMRMMLLM). The vehicle will stop and ignore the rest of the instruction(s) when it try to move to an obstacle or try to move outside of the Plateau.\n");
+            Console.WriteLine("- Instructions to move the vehicle are: L for spins left, R for spins right, M for move forward  (e.g. LMRMMLLM).");
+            Console.WriteLine("  The vehicle will stop and ignore the rest of the instruction(s) when it try to move to an obstacle or try to move outside of the Plateau.\n");
         }
 
         public int[] GetPlateauCornersCoordinates()
@@ -136,14 +137,36 @@
              return true;
         }
 
-        public void DisplayVehiclePosAndFacing(string marsRoverPosAndFacing)
+        public bool GetGenerateObstacle()
         {
-            Console.WriteLine(marsRoverPosAndFacing);
+            Console.WriteLine($"Are there any obstacles on the Plateau? (Y/N):");
+            var hasObstacles = Console.ReadLine();
+            if (hasObstacles != null)
+            {
+                hasObstacles = hasObstacles.ToUpper();
+                while (!(hasObstacles == "N" || hasObstacles == "Y"))
+                {
+                    UserErrInput();
+                    Console.WriteLine($"Are there any obstacles on the Plateau? (Y/N):");
+                    hasObstacles = Console.ReadLine();
+                    if (hasObstacles != null)
+                        hasObstacles = hasObstacles.ToUpper();
+                }
+                return (hasObstacles=="Y");
+            }
+            else
+                return false;
         }
+        
 
         private void UserErrInput()
         {
             Console.WriteLine("Invalid input, please enter again.");
+        }
+
+        public void DisplayVehiclePosAndFacing(string marsRoverPosAndFacing)
+        {
+            Console.WriteLine(marsRoverPosAndFacing);
         }
     }
 }

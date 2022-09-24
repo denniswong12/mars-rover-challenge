@@ -87,9 +87,28 @@
 
         public void DisplayAllVehiclePos(string vehicleType)
         {
+/* draw output
+            var horizontalLine = "";
+            var verticleLine = "|";
+
+            Console.WriteLine($"\nThe {vehicleType} coordinates and facing are:");
+
+            for (int i = 0; i < _plateauMaxCoordinates[0]; i++)
+                horizontalLine += "-";
+            Console.WriteLine(horizontalLine);
+            for (int i = 0; i < _plateauMaxCoordinates[0]; i++)
+            {
+                if (i != 3)
+                    verticleLine += " | ";
+                else
+                    verticleLine += " MR ";
+            }
+            Console.WriteLine(verticleLine);
+*/
             Console.WriteLine($"\nThe {vehicleType} coordinates and facing are:");
             foreach (MarsRover marsRover in _listMarsRovers)
             {
+                //String.Format("|{0,5}|{1,5}|{2,5}|{3,5}|", arg0, arg1, arg2, arg3);
                 Console.WriteLine(marsRover.GetCurrentPosAndFacing());
             }
         }
