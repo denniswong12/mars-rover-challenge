@@ -70,6 +70,7 @@
 
         public void MoveVehicle(int vehicleNum, string vehicleType, string vehicleMoveIns)
         {
+            bool exitForeach = false;
             foreach (char singleMoveIns in vehicleMoveIns)
             {
                 switch (singleMoveIns)
@@ -112,14 +113,17 @@
                             else
                             {
                                 Console.WriteLine($"Stopped {vehicleType} at {marsRoverPosFacing[0] - '0'} {marsRoverPosFacing[2] - '0'} to avoid moving out of the Plateau.");
+                                exitForeach = true;
                             }
                         }
                         else
                         {
                             Console.WriteLine($"Stopped {vehicleType} at {marsRoverPosFacing[0] - '0'} {marsRoverPosFacing[2] - '0'} to avoid collision.");
+                            exitForeach = true;
                         }
                         break;
                 }
+                if (exitForeach) break;
             }
         }
 
