@@ -116,7 +116,7 @@
             string disVehicles = $"\nThe {vehicleType} coordinates and facing are:\n";
             foreach (MarsRover marsRover in _listMarsRovers)
             {
-                disVehicles += $"{vehicleType}: {marsRover.GetCurrentPosAndFacing()}\n";
+                disVehicles += $"{vehicleType} - {marsRover.GetVehicleID()}: {marsRover.GetCurrentPosAndFacing()}\n";
             }
             _userInterface.DisplayToConsole(disVehicles);
         }
