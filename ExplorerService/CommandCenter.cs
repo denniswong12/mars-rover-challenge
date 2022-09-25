@@ -110,24 +110,32 @@
                                 break;
                         }
 
-                        if (_plateau.IsEmptyPos(newX, newY))
+                        try
                         {
-                            if (!_plateau.IsOutOfBoundaryPos(newX, newY))
+
+                            if (_plateau.IsEmptyPos(newX, newY))
                             {
-                                _plateau.RemoveObstacle(vehicleType, marsRoverPosFacing[0] - '0', marsRoverPosFacing[2] - '0');
-                                _listMarsRovers[vehicleNum].MoveOneStepForward();
-                                _plateau.AddSingleObstacle(vehicleType, newX, newY);
+                                if (!_plateau.IsOutOfBoundaryPos(newX, newY))
+                                {
+                                    _plateau.RemoveObstacle(vehicleType, marsRoverPosFacing[0] - '0', marsRoverPosFacing[2] - '0');
+                                    _listMarsRovers[vehicleNum].MoveOneStepForward();
+                                    _plateau.AddSingleObstacle(vehicleType, newX, newY);
+                                }
+                                else
+                                {
+                                    exitForeach = true;
+                                    throw new VehicleMovementException($"Stopped {vehicleType} at {marsRoverPosFacing[0] - '0'} {marsRoverPosFacing[2] - '0'} to avoid moving out of the Plateau.");
+                                }
                             }
                             else
                             {
-                                _userInterface.DisplayToConsole($"Stopped {vehicleType} at {marsRoverPosFacing[0] - '0'} {marsRoverPosFacing[2] - '0'} to avoid moving out of the Plateau.");
                                 exitForeach = true;
+                                throw new VehicleMovementException($"Stopped {vehicleType} at {marsRoverPosFacing[0] - '0'} {marsRoverPosFacing[2] - '0'} to avoid collision.");
                             }
                         }
-                        else
+                        catch (VehicleMovementException ex)
                         {
-                            _userInterface.DisplayToConsole($"Stopped {vehicleType} at {marsRoverPosFacing[0] - '0'} {marsRoverPosFacing[2] - '0'} to avoid collision.");
-                            exitForeach = true;
+                            Console.WriteLine(ex.Message);
                         }
                         break;
                 }
