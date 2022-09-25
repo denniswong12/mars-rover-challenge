@@ -2,20 +2,18 @@
 {
     public abstract class Plateau : IPlateau
     {
-        public int NumPlateauCorners{ get; private set; }
-        public List<int> PlateauMaxCoordinates { get; private set; }
-        public List<int> PlateauCornersCoordinates { get; private set; }
+        public int MaxX { get; set; }
+        public int MaxY { get; set; }
+        public int NumPlateauCorners { get; private set; }
+        public List<int> PlateauVerticesCoordinates { get; private set; }
         protected List<string[]> Obstacle { get; private set; } //structure: {{ Obstacle Type, Coordinate X, Coordinate Y },{...} }
 
-        public Plateau(int numPlateauCorners, List<int> plateauCornersCoordinates, List<int> plateauMaxCoordinates)
+        public Plateau(int numPlateauVertices, List<int> plateauVerticesCoordinates)
         {
             Obstacle = new List<string[]>();
-            NumPlateauCorners = numPlateauCorners;
-            PlateauCornersCoordinates = plateauCornersCoordinates;
-            PlateauMaxCoordinates = plateauMaxCoordinates;
+            NumPlateauCorners = numPlateauVertices;
+            PlateauVerticesCoordinates = plateauVerticesCoordinates;
         }
-
-        public abstract string WhoAmI();
 
         public abstract int PlateauSize();
 
@@ -43,7 +41,7 @@
             return Obstacle;
         }
 
-        public void AddObstacle(string obstacleType, int x, int y)
+        public void AddSingleObstacle(string obstacleType, int x, int y)
         {
             Obstacle.Add(new string[] { obstacleType, x.ToString(), y.ToString() });
         }

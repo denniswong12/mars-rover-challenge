@@ -1,41 +1,64 @@
 ﻿namespace ExplorerService
 {
     public class TrianglePlateau : Plateau
-    { 
-        public TrianglePlateau(int numPlateauCorners, List<int> plateauCornersCoordinates, List<int> plateauMaxCoordinates) : base(numPlateauCorners: numPlateauCorners, plateauCornersCoordinates: plateauCornersCoordinates, plateauMaxCoordinates: plateauMaxCoordinates)
+    {
+        public TrianglePlateau(int numPlateauVertices, List<int> plateauVerticesCoordinates) : base(numPlateauVertices: numPlateauVertices, plateauVerticesCoordinates: plateauVerticesCoordinates)
         {
-        }
-
-        public override string WhoAmI()
-        {
-            return "Triangle Plateau :D";
+            for (int i = 0; i < PlateauVerticesCoordinates.Count() - 1; i += 2)
+            {
+                if (MaxX < PlateauVerticesCoordinates[i]) MaxX = PlateauVerticesCoordinates[i];
+                if (MaxY < PlateauVerticesCoordinates[i + 1]) MaxY = PlateauVerticesCoordinates[i + 1];
+            }
         }
 
         public override int PlateauSize()
         {
-            return ((PlateauMaxCoordinates[0] + 1) * (PlateauMaxCoordinates[1] + 1));
+            int baseLength = 0;
+            for (int i = 0; i < PlateauVerticesCoordinates.Count() - 1; i += 2)
+            {
+                if (PlateauVerticesCoordinates[i] != 0 && PlateauVerticesCoordinates[i + 1] == 0)
+                    baseLength = PlateauVerticesCoordinates[i];
+            }
+            return (baseLength * MaxY / 2);
         }
 
         public override bool IsOutOfBoundaryPos(int x, int y)
         {
-            int maxX = 0;
-            int maxY = 0;
-            //Assume lower left hand corner of the Plateau is (0,0)
-            const int minX = 0;
-            const int minY = 0;
-            const int numCoordinates = 2;
-            int[,] eachCornersCoordinates = new int[NumPlateauCorners, numCoordinates];
+            int gradientBase = 0;
+            bool pointAtLeft = false;
+            bool acuteTriangle = true;
 
-            for (int i = 0; i < NumPlateauCorners; i++)
+            if (x > MaxX || y > MaxY || x == 0)
+                return true;
+
+            for (int i = 0; i < PlateauVerticesCoordinates.Count() - 1; i += 2)
             {
-                eachCornersCoordinates[i, 0] = PlateauCornersCoordinates[i * numCoordinates];
-                eachCornersCoordinates[i, 1] = PlateauCornersCoordinates[i * numCoordinates + 1];
-                //Assume Plateau is a rectangle
-                if (maxX < eachCornersCoordinates[i, 0]) maxX = eachCornersCoordinates[i, 0];
-                if (maxY < eachCornersCoordinates[i, 1]) maxY = eachCornersCoordinates[i, 1];
+                if ((PlateauVerticesCoordinates[i + 1] == MaxY) && (x < PlateauVerticesCoordinates[i]))
+                    pointAtLeft = true;
+
+                if (PlateauVerticesCoordinates[i] == MaxX && PlateauVerticesCoordinates[i + 1] == MaxY)
+                {
+                    acuteTriangle = false;
+                }
+
+                if (PlateauVerticesCoordinates[i] != MaxX && PlateauVerticesCoordinates[i] != 0)
+                    gradientBase = MaxX - PlateauVerticesCoordinates[i];
             }
 
-            return (x < minX || y < minY || x > maxX || y > maxY);
+            if (acuteTriangle && pointAtLeft && (y / x > MaxY / MaxX))
+                return true;
+
+            if (acuteTriangle && !pointAtLeft && ((y / (MaxX - x)) > (MaxY / gradientBase)))
+                return true;
+
+            if (!acuteTriangle && (y / x > MaxY / MaxX))
+                return true;
+
+            if (!acuteTriangle && (y / x < MaxY / MaxX))
+                if ((y / (x - (MaxX - gradientBase))) < (MaxY / gradientBase))
+                    return true;
+
+            return false;
         }
     }
 }

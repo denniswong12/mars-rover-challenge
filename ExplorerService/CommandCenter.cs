@@ -3,34 +3,30 @@
     public class CommandCenter
     {
         private Plateau _plateau;
-        private int _minPlateauSizeHasObstacles = 8;
+        private int _minPlateauSizeHasObstacles = 9;
         private const int _numCorrdinates = 2;
         private UserInterface _userInterface = new UserInterface();
-        private List<int> _plateauMaxCoordinates = new List<int>();
+        private List<int> _plateauVerticesCoordinates = new List<int>();
         private List<MarsRover> _listMarsRovers = new List<MarsRover>();
 
         public void InitEnvironment()
         {
+            int selectedShape = 0;
+            const int rectanglePlateau = 1;
+            const int trianglePlateau = 2;
+
             _userInterface.DisplayIntro();
-            if (_userInterface.GetPlateauShape() == 1)
-            {
-                _plateauMaxCoordinates = _userInterface.GetPlateauVerticesCoordinates(1);
-                List<int> plateauCorners = new List<int> { 0, 0, _plateauMaxCoordinates[0], 0, _plateauMaxCoordinates[0], _plateauMaxCoordinates[1], 0, _plateauMaxCoordinates[1] };
-                int numPlateauCorners = plateauCorners.Count() / _numCorrdinates;
-                _plateau = new RectanglePlateau(numPlateauCorners, plateauCorners, _plateauMaxCoordinates);
-            }
-            else
-            {
-                _plateauMaxCoordinates = _userInterface.GetPlateauVerticesCoordinates(2);
-                List<int> plateauCorners = new List<int> { 0, 0, _plateauMaxCoordinates[0], 0, _plateauMaxCoordinates[0], _plateauMaxCoordinates[1], 0, _plateauMaxCoordinates[1] };
-                int numPlateauCorners = plateauCorners.Count() / _numCorrdinates;
-                _plateau = new TrianglePlateau(numPlateauCorners, plateauCorners, _plateauMaxCoordinates);
-            }
+            selectedShape = _userInterface.GetPlateauShape();
+            _plateauVerticesCoordinates = _userInterface.GetPlateauVerticesCoordinates(selectedShape);
+            int numPlateauVertices = _plateauVerticesCoordinates.Count() / _numCorrdinates;
+            if (selectedShape == rectanglePlateau)
+                _plateau = new RectanglePlateau(numPlateauVertices, _plateauVerticesCoordinates);
+            else if (selectedShape == trianglePlateau)
+                _plateau = new TrianglePlateau(numPlateauVertices, _plateauVerticesCoordinates);
         }
 
         public void AddObstacles(string obstacleType)
-        { 
-            Console.WriteLine(_plateau.WhoAmI());
+        {
             if (_plateau.PlateauSize() > _minPlateauSizeHasObstacles && _userInterface.GetGenerateObstacle(obstacleType))
             {
                 int obstacleX = 0;
@@ -41,22 +37,23 @@
 
                 while (numobstacle <= 0)
                     numobstacle = rnd.Next((int)(_plateau.PlateauSize() * maxObstaclesRatio));
-                    
+
                 for (int i=0; i< numobstacle; i++)
                 {
-                    while (!(_plateau.IsEmptyPos(obstacleX, obstacleY)))
+                    while (!(_plateau.IsEmptyPos(obstacleX, obstacleY)) || _plateau.IsOutOfBoundaryPos(obstacleX, obstacleY))
                     {
-                        obstacleX = rnd.Next(_plateauMaxCoordinates[0]);
-                        obstacleY = rnd.Next(_plateauMaxCoordinates[1]);
+                        obstacleX = rnd.Next(_plateau.MaxX);
+                        obstacleY = rnd.Next(_plateau.MaxY);
                     }
-                    _plateau.AddObstacle(obstacleType, obstacleX, obstacleY);
+                    _plateau.AddSingleObstacle(obstacleType, obstacleX, obstacleY);
                 }
             }
         }
 
         public void AddVehicle(string vehicleType)
-        { 
-            int numVehicle = _userInterface.GetNumVehicle(vehicleType, _plateau.PlateauSize());
+        {
+            List<string[]> obstacle = _plateau.RetrieveObstacles();
+            int numVehicle = _userInterface.GetNumVehicle(vehicleType, _plateau.PlateauSize()-obstacle.Count());
             for (int i = 0; i < numVehicle; i++)
             {
                 int[] vehicleInitPos = _userInterface.GetVehicleInitPos(AddOrdinal(i + 1), vehicleType);
@@ -68,7 +65,7 @@
                 string vehicleInitFacing = _userInterface.GetVehicleInitFacing(AddOrdinal(i + 1), vehicleType);
 
                 _listMarsRovers.Add(new MarsRover(vehicleInitPos[0], vehicleInitPos[1], vehicleInitFacing, $"MR{i}", vehicleType));
-                _plateau.AddObstacle(vehicleType, vehicleInitPos[0], vehicleInitPos[1]);
+                _plateau.AddSingleObstacle(vehicleType, vehicleInitPos[0], vehicleInitPos[1]);
                 ManageVehicleAction(i, vehicleType);
             }
         }
@@ -119,7 +116,7 @@
                             {
                                 _plateau.RemoveObstacle(vehicleType, marsRoverPosFacing[0] - '0', marsRoverPosFacing[2] - '0');
                                 _listMarsRovers[vehicleNum].MoveOneStepForward();
-                                _plateau.AddObstacle(vehicleType, newX, newY);
+                                _plateau.AddSingleObstacle(vehicleType, newX, newY);
                             }
                             else
                             {

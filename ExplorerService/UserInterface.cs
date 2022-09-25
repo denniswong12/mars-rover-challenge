@@ -1,4 +1,6 @@
-﻿namespace ExplorerService
+﻿using System.Net.NetworkInformation;
+
+namespace ExplorerService
 {
     public class UserInterface
     {
@@ -6,8 +8,9 @@
         {
             Console.WriteLine("Please note the following when entering information:");
             Console.WriteLine("- All coordinates should be entered in the format \"x y\" where x and y are integers.");
-            Console.WriteLine("- The lower left hand corner of the Plateau is (0,0), each coordinate of the upper right hand corner of the Plateau must be > or = 0.");
-            Console.WriteLine("- You can have some Aliens or Rocks on the Plateau with the Plateau size > 8.");
+            Console.WriteLine("- The lower left hand corner of the Plateau is (0, 0), all other coordinates of the of the Plateau must be > or = 0.");
+            Console.WriteLine("- The Triangle Plateau with base lying on X - axis.");
+            Console.WriteLine("- You can have some Aliens or Rocks on the Plateau with the Plateau size > 9.");
             Console.WriteLine("- The initial position of a vehicle must be within the Plateau.");
             Console.WriteLine("- Due to the limitation of the Plateau's size, there is a maximum number of vehicle can be put on to the Plateau.");
             Console.WriteLine("- Only one character is needed when entering facing of a vehicle: N for North, E for East, S for South and W for West.");
@@ -18,12 +21,13 @@
         public int GetPlateauShape()
         {
             int plateauShape;
-            Console.WriteLine("Please select the shape of the Plateau (1-Rectangle, 2-Triangle)");
+            string requestMsg = "Please select the shape of the Plateau (1-Rectangle, 2-Triangle)";
+            Console.WriteLine(requestMsg);
             var plateauShapeStr = Console.ReadLine();
             if (plateauShapeStr != null)
             {
                 while (!(Int32.TryParse(plateauShapeStr, out plateauShape)) || plateauShape < 1 || plateauShape > 2)
-                    plateauShapeStr = ReInputData("Please select the shape of the Plateau (1-Rectangle, 2-Triangle)");
+                    plateauShapeStr = ReInputData(requestMsg);
                 return (plateauShape);
             }
             else
@@ -32,16 +36,17 @@
 
         public List<int> GetPlateauVerticesCoordinates(int plateauShape)
         {
-            Console.WriteLine("Please enter all coordinates of the vertices of the Plateau (starting from 0 0 and all other coordinates > 0):");
+            string requestMsg = "Please enter all coordinates of the vertices of the Plateau starting from 0 0 (e.g. 0 0 8 0 4 5 for a triangle):";
+            Console.WriteLine(requestMsg);
             var plateauMaxCoordinates = Console.ReadLine();
             if (plateauMaxCoordinates != null)
             {
                 List<int> vertices = new List<int>();
                 string[] plateauCoordinatesStr = plateauMaxCoordinates.Split(' ');
 
-                while (!Validate(plateauCoordinatesStr, plateauShape))
+                while (!ValidatePlateauVertices(plateauCoordinatesStr, plateauShape))
                 {
-                    plateauMaxCoordinates = ReInputData($"Please enter all coordinates of the vertices of the Plateau (starting from 0 0 and all other coordinates > 0):");
+                    plateauMaxCoordinates = ReInputData(requestMsg);
                     plateauCoordinatesStr = plateauMaxCoordinates.Split(' ');
                 }
                 for (int i = 0; i < plateauCoordinatesStr.Count(); i++)
@@ -52,28 +57,10 @@
                 return new List<int> { -1, -1 };
         }
 
-        private bool Validate(String[] plateauCoordinatesStr, int plateauShape)
-        {
-            const int numCoordinates = 2;
-            const int numTriangleVertices = 3;
-            const int numRectangleVertices = 4;
-            int coordinate;
-
-            if (!((plateauCoordinatesStr.Count() == numRectangleVertices * numCoordinates) || (plateauCoordinatesStr.Count() == numTriangleVertices * numCoordinates)) && (plateauShape == numTriangleVertices && plateauCoordinatesStr.Count() != numRectangleVertices * numCoordinates) || (plateauShape == numRectangleVertices && plateauCoordinatesStr.Count() != numRectangleVertices * numCoordinates))
-                return false;
-
-            for (int i=0; i<plateauCoordinatesStr.Count(); i++)
-            {
-                if (!(Int32.TryParse(plateauCoordinatesStr[i], out coordinate)) || coordinate < 0)
-                    return false;
-            }
-            return true;
-        }
-
         public int GetNumVehicle(string vehicleType, int maxNumVehicle)
         {
-            //Assume Plateau is a rectangle
-            Console.WriteLine($"Please enter the number of {vehicleType} with maximum {maxNumVehicle}.");
+            string requestMsg = $"Please enter the number of {vehicleType} with maximum {maxNumVehicle}.";
+            Console.WriteLine(requestMsg);
             var numVehiclesStr = Console.ReadLine();
             if (numVehiclesStr != null)
             {
@@ -81,7 +68,7 @@
                 while (!(Int32.TryParse(numVehiclesStr, out numVehicles)) || numVehicles < 0 || numVehicles > maxNumVehicle)
                 {
                     UserErrInput();
-                    Console.WriteLine($"Please enter the number of {vehicleType} with maximum {maxNumVehicle}.");
+                    Console.WriteLine(requestMsg);
                     numVehiclesStr = Console.ReadLine();
                 }
                 return numVehicles;
@@ -92,7 +79,8 @@
 
         public int[] GetVehicleInitPos(string vehicleNum, string vehicleType)
         {
-            Console.WriteLine($"Please enter the coordinates of the {vehicleNum} {vehicleType}:");
+            string requestMsg = $"Please enter the coordinates of the {vehicleNum} {vehicleType}:";
+            Console.WriteLine(requestMsg);
             var vehicleCoordinates = Console.ReadLine();
             if (vehicleCoordinates != null)
             {
@@ -102,7 +90,7 @@
 
                 while (vehicleCoordinatesStr.Count() != 2 || !(Int32.TryParse(vehicleCoordinatesStr[0], out vehicleCoordinateX)) || vehicleCoordinateX < 0 || !(Int32.TryParse(vehicleCoordinatesStr[1], out vehicleCoordinateY)) || vehicleCoordinateY < 0)
                 {
-                    vehicleCoordinates = ReInputData($"Please enter the coordinates of the {vehicleNum} {vehicleType}:");
+                    vehicleCoordinates = ReInputData(requestMsg);
                     vehicleCoordinatesStr = vehicleCoordinates.Split(' ');
                 }
                 return (new int[] { vehicleCoordinateX, vehicleCoordinateY });
@@ -113,13 +101,14 @@
 
         public string GetVehicleInitFacing(string vehicleNum, string vehicleType)
         {
-            Console.WriteLine($"Please enter the facing of the {vehicleNum} {vehicleType} (N/E/S/W):");
+            string requestMsg = $"Please enter the facing of the {vehicleNum} {vehicleType} (N/E/S/W):";
+            Console.WriteLine(requestMsg);
             var vehicleFacing= Console.ReadLine();
             if (vehicleFacing != null)
             {
                 vehicleFacing = vehicleFacing.ToUpper();
                 while ( !(vehicleFacing=="N" || vehicleFacing=="E" || vehicleFacing=="S" || vehicleFacing=="W") )
-                    vehicleFacing = ReInputData($"Please enter the facing of the {vehicleNum} {vehicleType} (N/E/S/W):");
+                    vehicleFacing = ReInputData(requestMsg);
                 return vehicleFacing;
             }
             else
@@ -128,13 +117,14 @@
 
         public string GetVehicleMovement(string vehicleNum, string vehicleType)
         {
-            Console.WriteLine($"Please enter the instruction(s) to move the {vehicleNum} {vehicleType} (e.g. LMRMMLLM):");
+            string requestMsg = $"Please enter the instruction(s) to move the {vehicleNum} {vehicleType} (e.g. MLMRMLMMM):";
+            Console.WriteLine(requestMsg);
             var vehicleMoveIns = Console.ReadLine();
             if (vehicleMoveIns != null)
             {
                 vehicleMoveIns = vehicleMoveIns.ToUpper();
                 while (!(ValidateMoveInstruction(vehicleMoveIns)))
-                    vehicleMoveIns = ReInputData($"Please enter the instruction(s) to move the {vehicleNum} {vehicleType} (e.g. LMRMMLLM):");
+                    vehicleMoveIns = ReInputData(requestMsg);
                 return vehicleMoveIns;
             }
             else
@@ -155,23 +145,46 @@
 
         public bool GetGenerateObstacle(string obstacleType)
         {
-            Console.WriteLine($"Are there any {obstacleType} on the Plateau? (Y/N):");
+            string requestMsg = $"Are there any {obstacleType} on the Plateau? (Y/N):";
+            Console.WriteLine(requestMsg);
             var hasObstacles = Console.ReadLine();
             if (hasObstacles != null)
             {
                 hasObstacles = hasObstacles.ToUpper();
                 while (!(hasObstacles == "N" || hasObstacles == "Y"))
-                    hasObstacles = ReInputData($"Are there any {obstacleType} on the Plateau? (Y/N):");
+                    hasObstacles = ReInputData(requestMsg);
                 return (hasObstacles=="Y");
             }
             else
                 return false;
         }
 
+        private bool ValidatePlateauVertices(String[] plateauCoordinatesStr, int plateauShape)
+        {
+            const int numCoordinates = 2;
+            const int rectanglePlateau = 1;
+            const int trianglePlateau = 2;
+            const int numTriangleVertices = 3;
+            const int numRectangleVertices = 4;
+            int coordinate;
+
+            if (!((plateauCoordinatesStr.Count() == numRectangleVertices * numCoordinates) || (plateauCoordinatesStr.Count() == numTriangleVertices * numCoordinates))
+                || ((plateauShape == rectanglePlateau) && (plateauCoordinatesStr.Count() != numRectangleVertices * numCoordinates))
+                || ((plateauShape == trianglePlateau) && (plateauCoordinatesStr.Count() != numTriangleVertices * numCoordinates)))
+                return false;
+
+            for (int i = 0; i < plateauCoordinatesStr.Count(); i++)
+            {
+                if (!(Int32.TryParse(plateauCoordinatesStr[i], out coordinate)) || coordinate < 0)
+                    return false;
+            }
+            return true;
+        }
+
         public string ReInputData(string msgToConsole)
         {
             UserErrInput();
-            Console.WriteLine(msgToConsole);
+            DisplayToConsole(msgToConsole);
             return (Console.ReadLine().ToUpper());
         }
 

@@ -20,6 +20,7 @@ public class CommandCenterTests
             Console.SetIn(inputs);
             _commandCenter.InitEnvironment();
             Console.ReadLine();
+            Console.ReadLine();
             _commandCenter.GetNumPlateauCorners().Should().Be(4);
         }
     }
@@ -27,12 +28,13 @@ public class CommandCenterTests
     [Test]
     public void Calling_InitEnvironment_And_Select_Triangle_Plateau_Should_Initiate_A_Triangle_Plateau()
     {
-        using (StreamReader inputs = new StreamReader("../../../../inputs/testInitPlateau.csv"))
+        using (StreamReader inputs = new StreamReader("../../../../inputs/testInitTrianglePlateau.csv"))
         {
             Console.SetIn(inputs);
             _commandCenter.InitEnvironment();
             Console.ReadLine();
-            _commandCenter.GetNumPlateauCorners().Should().Be(4);
+            Console.ReadLine();
+            _commandCenter.GetNumPlateauCorners().Should().Be(3);
         }
     }
 
@@ -43,6 +45,11 @@ public class CommandCenterTests
         {
             Console.SetIn(inputs);
             _commandCenter.InitEnvironment();
+            Console.ReadLine();
+            Console.ReadLine();
+            _commandCenter.AddObstacles("Aliens");
+            Console.ReadLine();
+            _commandCenter.AddObstacles("Rocks");
             Console.ReadLine();
             _commandCenter.AddVehicle("Mars Rover");
             Console.ReadLine();
@@ -69,6 +76,11 @@ public class CommandCenterTests
             Console.SetIn(inputs);
             _commandCenter.InitEnvironment();
             Console.ReadLine();
+            Console.ReadLine();
+            _commandCenter.AddObstacles("Aliens");
+            Console.ReadLine();
+            _commandCenter.AddObstacles("Rocks");
+            Console.ReadLine();
             _commandCenter.AddVehicle("Mars Rover");
             Console.ReadLine();
             Console.ReadLine();
@@ -92,6 +104,11 @@ public class CommandCenterTests
         {
             Console.SetIn(inputs);
             _commandCenter.InitEnvironment();
+            Console.ReadLine();
+            Console.ReadLine();
+            _commandCenter.AddObstacles("Aliens");
+            Console.ReadLine();
+            _commandCenter.AddObstacles("Rocks");
             Console.ReadLine();
             _commandCenter.AddVehicle("Mars Rover");
             Console.ReadLine();
@@ -117,6 +134,11 @@ public class CommandCenterTests
             Console.SetIn(inputs);
             _commandCenter.InitEnvironment();
             Console.ReadLine();
+            Console.ReadLine();
+            _commandCenter.AddObstacles("Aliens");
+            Console.ReadLine();
+            _commandCenter.AddObstacles("Rocks");
+            Console.ReadLine();
             _commandCenter.AddVehicle("Mars Rover");
             Console.ReadLine();
             Console.ReadLine();
@@ -141,6 +163,7 @@ public class CommandCenterTests
             Console.SetIn(inputs);
             _commandCenter.InitEnvironment();
             Console.ReadLine();
+            Console.ReadLine();
             _commandCenter.AddObstacles("Aliens");
             Console.ReadLine();
 
@@ -161,6 +184,7 @@ public class CommandCenterTests
         {
             Console.SetIn(inputs);
             _commandCenter.InitEnvironment();
+            Console.ReadLine();
             Console.ReadLine();
             _commandCenter.AddObstacles("Aliens");
             _commandCenter.DisplayAllObstaclePos();

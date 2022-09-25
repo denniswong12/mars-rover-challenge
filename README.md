@@ -2,7 +2,7 @@
 
 - This system is a Console application with user input via console and display results onto the console.
 - In this system, the surface of Mars is represented by a Plateau, starting from coordinate (0,0), following the x-axis and y-axis, user can define the size and shape of it by entering the coordinates of the vertices of the Plateau.
-- Aliens and Rocks can exist for Plateau with size bigger than 8, beware!
+- Aliens and Rocks can exist for Plateau with size bigger than 9, beware!
 - User can also add some Mars Rovers onto the Plateau, remember those Rovers can’t overlap with each other and of course not over the obstacles. The Rovers can’t be put outside of the Plateau as well.
 - When adding the Rovers, user need to specify the coordinate and the facing of it. The facing can be marked by:
     - N : North
@@ -69,8 +69,9 @@ Subclass - MarsRover:
 ***************
 Please note the following when entering information:
 - All coordinates should be entered in the format "x y" where x and y are integers.
-- The lower left hand corner of the Plateau is (0,0), each coordinate of the upper right hand corner of the Plateau must be > or = 0.
-- You can have some Aliens or Rocks on the Plateau with the Plateau size > 8.
+- The lower left hand corner of the Plateau is (0, 0), all other coordinates of the of the Plateau must be > or = 0.
+- The Triangle Plateau with base lying on X - axis.
+- You can have some Aliens or Rocks on the Plateau with the Plateau size > 9.
 - The initial position of a vehicle must be within the Plateau.
 - Due to the limitation of the Plateau's size, there is a maximum number of vehicle can be put on to the Plateau.
 - Only one character is needed when entering facing of a vehicle: N for North, E for East, S for South and W for West.
@@ -78,37 +79,39 @@ Please note the following when entering information:
   The vehicle will stop and ignore the rest of the instruction(s) when it try to move to an obstacle or try to move outside of the Plateau.
 
 Please select the shape of the Plateau (1-Rectangle, 2-Triangle)
-1
-Please enter the upper right hand corner coordinates of the Plateau:
-4 5
+2
+Please enter all coordinates of the vertices of the Plateau starting from 0 0 (e.g. 0 0 8 0 4 5 for a triangle):
+0 0 8 0 4 5
 Are there any Aliens on the Plateau? (Y/N):
 Y
 Are there any Rocks on the Plateau? (Y/N):
 Y
 
 The coordinates of the obstacles are:
-Aliens: 0 0
-Aliens: 1 1
-Aliens: 2 2
-Aliens: 3 2
-Aliens: 3 4
-Rocks: 1 3
-Rocks: 3 3
-Rocks: 0 2
-Rocks: 1 0
+Aliens: 5 3
+Rocks: 5 0
+Rocks: 6 0
 
-Please enter the number of Mars Rover with maximum 30.
-1
+Please enter the number of Mars Rover with maximum 17.
+2
 Please enter the coordinates of the 1st Mars Rover:
-2 4
+3 0
 Please enter the facing of the 1st Mars Rover (N/E/S/W):
-E
-Please enter the instruction(s) to move the 1st Mars Rover (e.g. LMRMMLLM):
-MMRMLMMMLLM
-Stopped Mars Rover at 2 4 to avoid collision.
+N
+Please enter the instruction(s) to move the 1st Mars Rover (e.g. MLMRMLMMM):
+RMMLM
+Stopped Mars Rover at 4 0 to avoid collision.
+Please enter the coordinates of the 2nd Mars Rover:
+3 2
+Please enter the facing of the 2nd Mars Rover (N/E/S/W):
+S
+Please enter the instruction(s) to move the 2nd Mars Rover (e.g. MLMRMLMMM):
+LMLMMMM
+Stopped Mars Rover at 4 5 to avoid moving out of the Plateau.
 
 The Mars Rover coordinates and facing are:
-Mars Rover - MR0: 2 4 E
+Mars Rover - MR0: 4 0 E
+Mars Rover - MR1: 4 5 N
 ***************
 
 ## Development framework
@@ -121,7 +124,8 @@ How to test
 1. If user doesn’t add obstacles, there are no rocks/aliens/etc on the Plateau stopping the rover to move.
 2. Assume user input the number of Mars rovers.
 3. All instructions can be successfully transmitted to the rover.
-4. Every turn / move can be carried out successfully, with the following limitations:
+4. For Triangle Plateau, assume the base lying on X - axis.
+5. Every turn / move can be carried out successfully, with the following limitations:
     i. Rovers will not be able to move out of the boundaries of the Plateau.
     ii. The remaining instructions will be ignored after the rover is trying to move out of the boundaries of the Plateau.
     iii. Two or more rovers cannot stop/passing by the same location(i.e. same X and Y coordinates).
