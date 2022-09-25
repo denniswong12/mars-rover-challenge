@@ -81,37 +81,67 @@ Please note the following when entering information:
 Please select the shape of the Plateau (1-Rectangle, 2-Triangle)
 2
 Please enter all coordinates of the vertices of the Plateau starting from 0 0 (e.g. 0 0 8 0 4 5 for a triangle):
+
 0 0 8 0 4 5
+
 Are there any Aliens on the Plateau? (Y/N):
+
 Y
+
 Are there any Rocks on the Plateau? (Y/N):
+
 Y
+
 
 The coordinates of the obstacles are:
+
 Aliens: 5 3
+
 Rocks: 5 0
+
 Rocks: 6 0
 
+
 Please enter the number of Mars Rover with maximum 17.
+
 2
+
 Please enter the coordinates of the 1st Mars Rover:
+
 3 0
+
 Please enter the facing of the 1st Mars Rover (N/E/S/W):
+
 N
+
 Please enter the instruction(s) to move the 1st Mars Rover (e.g. MLMRMLMMM):
+
 RMMLM
+
 Stopped Mars Rover at 4 0 to avoid collision.
+
 Please enter the coordinates of the 2nd Mars Rover:
+
 3 2
+
 Please enter the facing of the 2nd Mars Rover (N/E/S/W):
+
 S
+
 Please enter the instruction(s) to move the 2nd Mars Rover (e.g. MLMRMLMMM):
+
 LMLMMMM
+
 Stopped Mars Rover at 4 5 to avoid moving out of the Plateau.
 
+
+
 The Mars Rover coordinates and facing are:
+
 Mars Rover - MR0: 4 0 E
+
 Mars Rover - MR1: 4 5 N
+
 ***************
 
 ## Development framework
