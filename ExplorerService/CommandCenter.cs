@@ -12,14 +12,27 @@
         public void InitEnvironment()
         {
             _userInterface.DisplayIntro();
-            _plateauMaxCoordinates = _userInterface.GetPlateauCornersCoordinates();
-            List<int> plateauCorners = new List<int> { 0, 0, _plateauMaxCoordinates[0], 0, _plateauMaxCoordinates[0], _plateauMaxCoordinates[1], 0, _plateauMaxCoordinates[1] };
-            int numPlateauCorners = plateauCorners.Count() / _numCorrdinates;
-            _plateau = new Plateau(numPlateauCorners, plateauCorners, _plateauMaxCoordinates);
+            if (_userInterface.GetPlateauShape() == 1)
+            {
+                _plateauMaxCoordinates = _userInterface.GetPlateauCornersCoordinates();
+                //_plateauMaxCoordinates = _userInterface.GetPlateauCornersCoordinates("RectanglePlateau");
+                List<int> plateauCorners = new List<int> { 0, 0, _plateauMaxCoordinates[0], 0, _plateauMaxCoordinates[0], _plateauMaxCoordinates[1], 0, _plateauMaxCoordinates[1] };
+                int numPlateauCorners = plateauCorners.Count() / _numCorrdinates;
+                _plateau = new RectanglePlateau(numPlateauCorners, plateauCorners, _plateauMaxCoordinates);
+            }
+            else
+            {
+                _plateauMaxCoordinates = _userInterface.GetPlateauCornersCoordinates();
+                //_plateauMaxCoordinates = _userInterface.GetPlateauCornersCoordinates("TrianglePlateau");
+                List<int> plateauCorners = new List<int> { 0, 0, _plateauMaxCoordinates[0], 0, _plateauMaxCoordinates[0], _plateauMaxCoordinates[1], 0, _plateauMaxCoordinates[1] };
+                int numPlateauCorners = plateauCorners.Count() / _numCorrdinates;
+                _plateau = new TrianglePlateau(numPlateauCorners, plateauCorners, _plateauMaxCoordinates);
+            }
         }
 
         public void AddObstacles(string obstacleType)
-        {
+        { 
+            //Console.WriteLine(_plateau.WhoAmI());
             if (_plateau.PlateauSize() > _minPlateauSizeHasObstacles && _userInterface.GetGenerateObstacle(obstacleType))
             {
                 int obstacleX = 0;
@@ -44,7 +57,7 @@
         }
 
         public void AddVehicle(string vehicleType)
-        {
+        { 
             int numVehicle = _userInterface.GetNumVehicle(vehicleType, _plateau.PlateauSize());
             for (int i = 0; i < numVehicle; i++)
             {

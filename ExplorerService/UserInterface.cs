@@ -15,6 +15,21 @@
             Console.WriteLine("  The vehicle will stop and ignore the rest of the instruction(s) when it try to move to an obstacle or try to move outside of the Plateau.\n");
         }
 
+        public int GetPlateauShape()
+        {
+            int plateauShape;
+            Console.WriteLine("Please select the shape of the Plateau (1-Rectangle, 2-Triangle)");
+            var plateauShapeStr = Console.ReadLine();
+            if (plateauShapeStr != null)
+            {
+                while (!(Int32.TryParse(plateauShapeStr, out plateauShape)) || plateauShape < 1 || plateauShape > 2)
+                    plateauShapeStr = ReInputData("Please select the shape of the Plateau (1-Rectangle, 2-Triangle)");
+                return (plateauShape);
+            }
+            else
+                return -1;
+        }
+
         public int[] GetPlateauCornersCoordinates()
         {
             Console.WriteLine("Please enter the upper right hand corner coordinates of the Plateau:");

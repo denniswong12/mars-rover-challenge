@@ -13,7 +13,19 @@ public class CommandCenterTests
     }
 
     [Test]
-    public void Calling_InitEnvironment_Should_Initiate_A_Plateau()
+    public void Calling_InitEnvironment_And_Select_Rectangle_Plateau_Should_Initiate_A_Rectangle_Plateau()
+    {
+        using (StreamReader inputs = new StreamReader("../../../../inputs/testInitPlateau.csv"))
+        {
+            Console.SetIn(inputs);
+            _commandCenter.InitEnvironment();
+            Console.ReadLine();
+            _commandCenter.GetNumPlateauCorners().Should().Be(4);
+        }
+    }
+
+    [Test]
+    public void Calling_InitEnvironment_And_Select_Triangle_Plateau_Should_Initiate_A_Triangle_Plateau()
     {
         using (StreamReader inputs = new StreamReader("../../../../inputs/testInitPlateau.csv"))
         {

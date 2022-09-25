@@ -20,12 +20,19 @@ public class UserInterfaceTests
     }
 
     [Test]
-    public void Given_User_Input_2_As_The_Number_Of_Vehicles_Should_Return_2()
+    public void Given_User_Input_Two_As_The_Number_Of_Vehicles_Should_Return_Two()
     {
         Console.SetIn(new StringReader("2"));
         _userInterface.GetNumVehicle("Mars Rover(s)", 36).Should().Be(2);
     }
 
+    [Test]
+    public void Given_User_Input_One_As_The_Shape_Of_Plateau_Should_Return_One()
+    {
+        Console.SetIn(new StringReader("1"));
+        _userInterface.GetPlateauShape().Should().Be(1);
+    }
+    
     [Test]
     public void Given_User_Input_2_1_Of_The_Initial_Coordinates_Of_A_Vehicles_Should_Return_2_1()
     {

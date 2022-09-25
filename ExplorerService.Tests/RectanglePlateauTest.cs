@@ -1,0 +1,67 @@
+﻿namespace ExplorerService.Tests;
+
+public class TrianglePlateauTests
+{
+    private TrianglePlateau _plateau;
+
+    [SetUp]
+    public void Setup()
+    {
+        int[] plateauMaxCoordinates = { 5, 6 };
+        List<int> plateauCornersCoordinates = new List<int> { 0, 0, 0, 5, 5, 5, 5, 0 };
+        _plateau = new TrianglePlateau(4, plateauCornersCoordinates, plateauMaxCoordinates);
+    }
+
+    /* Not able to test after chaning NumPlateauCorners to "protected"
+        [Test]
+        public void Given_Plateau_Size_And_Number_Of_Points_Should_Be_Able_To_Create_A_Plateau()
+        {
+            _plateau.NumPlateauCorners.Should().Be(4);
+        }
+    */
+
+    [Test]
+    public void Check_Coordinates_With_Empty_Obstacles_Shold_Return_True()
+    {
+        _plateau.IsEmptyPos(0, 0).Should().Be(true);
+    }
+
+    [Test]
+    public void Add_Obstacle_With_Given_ObstacleType_And_Coordinates_Should_Return_False_When_Calling_IsEmptyPos_On_The_Same_Coordinates()
+    {
+        _plateau.AddObstacle("MarsRover", 0, 1);
+        _plateau.IsEmptyPos(0, 1).Should().Be(false);
+    }
+
+    [Test]
+    public void Remove_Obstacle_With_Given_ObstacleType_And_Coordinates_Should_Return_True_Whe_nCalling_IsEmptyPos_On_The_Same_Coordinates()
+    {
+        _plateau.RemoveObstacle("MarsRover", 0, 1);
+        _plateau.IsEmptyPos(0, 1).Should().Be(true);
+    }
+
+    [TestCase(1, 1)]
+    [TestCase(3, 1)]
+    [TestCase(4, 2)]
+    [TestCase(1, 4)]
+    public void Given_Coordinates_Of_A_Point_Not_On_The_Plateaus_Boundary_Should_Return_False(int x, int y)
+    {
+        _plateau.IsOutOfBoundaryPos(x, y).Should().Be(false);
+    }
+
+    [TestCase(0, 6)]
+    [TestCase(1, 6)]
+    [TestCase(6, 3)]
+    [TestCase(-1, 0)]
+    [TestCase(7, 5)]
+    public void Given_Coordinates_Of_A_Point_On_The_Plateaus_Boundary_Should_Return_True(int x, int y)
+    {
+        _plateau.IsOutOfBoundaryPos(x, y).Should().Be(true);
+    }
+
+    [Test]
+    public void Get_Plateau_Size_Should_Return_Its_Size()
+    {
+        _plateau.PlateauSize().Should().Be(42);
+    }
+}
