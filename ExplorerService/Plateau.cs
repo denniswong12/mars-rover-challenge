@@ -3,11 +3,11 @@
     public abstract class Plateau : IPlateau
     {
         public int NumPlateauCorners{ get; private set; }
-        public int[] PlateauMaxCoordinates { get; private set; }
+        public List<int> PlateauMaxCoordinates { get; private set; }
         public List<int> PlateauCornersCoordinates { get; private set; }
         protected List<string[]> Obstacle { get; private set; } //structure: {{ Obstacle Type, Coordinate X, Coordinate Y },{...} }
 
-        public Plateau(int numPlateauCorners, List<int> plateauCornersCoordinates, int[] plateauMaxCoordinates)
+        public Plateau(int numPlateauCorners, List<int> plateauCornersCoordinates, List<int> plateauMaxCoordinates)
         {
             Obstacle = new List<string[]>();
             NumPlateauCorners = numPlateauCorners;

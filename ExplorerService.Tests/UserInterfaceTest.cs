@@ -11,12 +11,12 @@ public class UserInterfaceTests
     }
 
     [Test]
-    public void Given_User_Input_5_5_Of_The_Plateau_Corner_Coordinates_Should_Return_int_array_5_5()
+    public void Given_User_Input_Vertices_Of_The_Triangle_Plateau_Corner_Coordinates_Should_Return_Int_Array_Containing_Vertices()
     {
-        var plateauCornerCoordinates = "5 5";
-        int[] expectedCoordinates = new int[] { 5, 5 };
+        var plateauCornerCoordinates = "0 0 5 5 10 0";
+        List<int> expectedCoordinates = new List<int> { 0, 0, 5, 5, 10, 0 };
         Console.SetIn(new StringReader(plateauCornerCoordinates));
-        CollectionAssert.AreEqual(expectedCoordinates, _userInterface.GetPlateauCornersCoordinates());
+        CollectionAssert.AreEqual(expectedCoordinates, _userInterface.GetPlateauVerticesCoordinates(2));
     }
 
     [Test]

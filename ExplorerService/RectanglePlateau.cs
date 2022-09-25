@@ -2,7 +2,7 @@
 {
     public class RectanglePlateau : Plateau
     {
-        public RectanglePlateau(int numPlateauCorners, List<int> plateauCornersCoordinates, int[] plateauMaxCoordinates) : base(numPlateauCorners: numPlateauCorners, plateauCornersCoordinates: plateauCornersCoordinates, plateauMaxCoordinates: plateauMaxCoordinates)
+        public RectanglePlateau(int numPlateauCorners, List<int> plateauCornersCoordinates, List<int> plateauMaxCoordinates) : base(numPlateauCorners: numPlateauCorners, plateauCornersCoordinates: plateauCornersCoordinates, plateauMaxCoordinates: plateauMaxCoordinates)
         {
         }
 

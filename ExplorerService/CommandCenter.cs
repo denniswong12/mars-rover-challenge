@@ -6,7 +6,7 @@
         private int _minPlateauSizeHasObstacles = 8;
         private const int _numCorrdinates = 2;
         private UserInterface _userInterface = new UserInterface();
-        private int[] _plateauMaxCoordinates = new int[_numCorrdinates];
+        private List<int> _plateauMaxCoordinates = new List<int>();
         private List<MarsRover> _listMarsRovers = new List<MarsRover>();
 
         public void InitEnvironment()
@@ -14,16 +14,14 @@
             _userInterface.DisplayIntro();
             if (_userInterface.GetPlateauShape() == 1)
             {
-                _plateauMaxCoordinates = _userInterface.GetPlateauCornersCoordinates();
-                //_plateauMaxCoordinates = _userInterface.GetPlateauCornersCoordinates("RectanglePlateau");
+                _plateauMaxCoordinates = _userInterface.GetPlateauVerticesCoordinates(1);
                 List<int> plateauCorners = new List<int> { 0, 0, _plateauMaxCoordinates[0], 0, _plateauMaxCoordinates[0], _plateauMaxCoordinates[1], 0, _plateauMaxCoordinates[1] };
                 int numPlateauCorners = plateauCorners.Count() / _numCorrdinates;
                 _plateau = new RectanglePlateau(numPlateauCorners, plateauCorners, _plateauMaxCoordinates);
             }
             else
             {
-                _plateauMaxCoordinates = _userInterface.GetPlateauCornersCoordinates();
-                //_plateauMaxCoordinates = _userInterface.GetPlateauCornersCoordinates("TrianglePlateau");
+                _plateauMaxCoordinates = _userInterface.GetPlateauVerticesCoordinates(2);
                 List<int> plateauCorners = new List<int> { 0, 0, _plateauMaxCoordinates[0], 0, _plateauMaxCoordinates[0], _plateauMaxCoordinates[1], 0, _plateauMaxCoordinates[1] };
                 int numPlateauCorners = plateauCorners.Count() / _numCorrdinates;
                 _plateau = new TrianglePlateau(numPlateauCorners, plateauCorners, _plateauMaxCoordinates);
@@ -32,7 +30,7 @@
 
         public void AddObstacles(string obstacleType)
         { 
-            //Console.WriteLine(_plateau.WhoAmI());
+            Console.WriteLine(_plateau.WhoAmI());
             if (_plateau.PlateauSize() > _minPlateauSizeHasObstacles && _userInterface.GetGenerateObstacle(obstacleType))
             {
                 int obstacleX = 0;

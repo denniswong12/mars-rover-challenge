@@ -1,15 +1,15 @@
 ﻿namespace ExplorerService.Tests;
 
-public class RectanglePlateauTests
+public class TrianglePlateauTests
 {
-    private RectanglePlateau _plateau;
+    private TrianglePlateau _plateau;
 
     [SetUp]
     public void Setup()
     {
-        int[] plateauMaxCoordinates = { 5, 6 };
+        List<int> plateauMaxCoordinates = new List<int> { 5, 6 };
         List<int> plateauCornersCoordinates = new List<int> { 0, 0, 0, 5, 5, 5, 5, 0 };
-        _plateau = new RectanglePlateau(4, plateauCornersCoordinates, plateauMaxCoordinates);
+        _plateau = new TrianglePlateau(4, plateauCornersCoordinates, plateauMaxCoordinates);
     }
 
     /* Not able to test after chaning NumPlateauCorners to "protected"

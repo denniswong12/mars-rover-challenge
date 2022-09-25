@@ -30,25 +30,44 @@
                 return -1;
         }
 
-        public int[] GetPlateauCornersCoordinates()
+        public List<int> GetPlateauVerticesCoordinates(int plateauShape)
         {
-            Console.WriteLine("Please enter the upper right hand corner coordinates of the Plateau:");
+            Console.WriteLine("Please enter all coordinates of the vertices of the Plateau (starting from 0 0 and all other coordinates > 0):");
             var plateauMaxCoordinates = Console.ReadLine();
             if (plateauMaxCoordinates != null)
             {
-                int plateauMaxX;
-                int plateauMaxY;
+                List<int> vertices = new List<int>();
                 string[] plateauCoordinatesStr = plateauMaxCoordinates.Split(' ');
-                
-                while (plateauCoordinatesStr.Count() != 2 || !(Int32.TryParse(plateauCoordinatesStr[0], out plateauMaxX)) || plateauMaxX < 0 || !(Int32.TryParse(plateauCoordinatesStr[1], out plateauMaxY)) || plateauMaxY < 0)
+
+                while (!Validate(plateauCoordinatesStr, plateauShape))
                 {
-                    plateauMaxCoordinates = ReInputData($"Please enter the upper right hand corner coordinates of the Plateau:");
+                    plateauMaxCoordinates = ReInputData($"Please enter all coordinates of the vertices of the Plateau (starting from 0 0 and all other coordinates > 0):");
                     plateauCoordinatesStr = plateauMaxCoordinates.Split(' ');
                 }
-                return (new int[] { plateauMaxX, plateauMaxY });
+                for (int i = 0; i < plateauCoordinatesStr.Count(); i++)
+                    vertices.Add(Int32.Parse(plateauCoordinatesStr[i]));
+                return vertices;
             }
             else
-                return new int[] { -1, -1 };
+                return new List<int> { -1, -1 };
+        }
+
+        private bool Validate(String[] plateauCoordinatesStr, int plateauShape)
+        {
+            const int numCoordinates = 2;
+            const int numTriangleVertices = 3;
+            const int numRectangleVertices = 4;
+            int coordinate;
+
+            if (!((plateauCoordinatesStr.Count() == numRectangleVertices * numCoordinates) || (plateauCoordinatesStr.Count() == numTriangleVertices * numCoordinates)) && (plateauShape == numTriangleVertices && plateauCoordinatesStr.Count() != numRectangleVertices * numCoordinates) || (plateauShape == numRectangleVertices && plateauCoordinatesStr.Count() != numRectangleVertices * numCoordinates))
+                return false;
+
+            for (int i=0; i<plateauCoordinatesStr.Count(); i++)
+            {
+                if (!(Int32.TryParse(plateauCoordinatesStr[i], out coordinate)) || coordinate < 0)
+                    return false;
+            }
+            return true;
         }
 
         public int GetNumVehicle(string vehicleType, int maxNumVehicle)
