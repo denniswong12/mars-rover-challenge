@@ -39,9 +39,7 @@ Class - UserInterface:
 - Display coordinates and facing of all vehicles on console.
 
 Interface - IPlateau
-
 Base Class - Plateau
-
 Subclasses - RectanglePlateau, TrianglePlateau:
 - Return the size of the Plateau to the caller.
 - Add obstacle/vehicle on the plateau.
@@ -52,9 +50,7 @@ Subclasses - RectanglePlateau, TrianglePlateau:
 
 
 Interface - IVehicle
-
 Base Class - Vehicle
-
 Subclass - MarsRover:
 - Instantiate MarsRover object.
 - Hold the vehicle ID and type of the MarsRover object.
