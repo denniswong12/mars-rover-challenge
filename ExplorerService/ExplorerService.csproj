@@ -9,8 +9,12 @@
 
   <ItemGroup>
     <None Remove="Exceptions\" />
+    <None Remove="View\" />
+    <None Remove="Controller\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exceptions\" />
+    <Folder Include="View\" />
+    <Folder Include="Controller\" />
   </ItemGroup>
 </Project>

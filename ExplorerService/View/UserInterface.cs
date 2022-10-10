@@ -188,6 +188,7 @@ namespace ExplorerService
             return (Console.ReadLine().ToUpper());
         }
 
+
         public void DisplayToConsole(string message)
         {
             Console.WriteLine(message);

@@ -15,7 +15,7 @@ public class CommandCenterTests
     [Test]
     public void Calling_InitEnvironment_And_Select_Rectangle_Plateau_Should_Initiate_A_Rectangle_Plateau()
     {
-        using (StreamReader inputs = new StreamReader("../../../../inputs/testInitPlateau.csv"))
+        using (StreamReader inputs = new StreamReader("../../../../inputsForTests/testInitPlateau.csv"))
         {
             Console.SetIn(inputs);
             _commandCenter.InitEnvironment();
@@ -28,7 +28,7 @@ public class CommandCenterTests
     [Test]
     public void Calling_InitEnvironment_And_Select_Triangle_Plateau_Should_Initiate_A_Triangle_Plateau()
     {
-        using (StreamReader inputs = new StreamReader("../../../../inputs/testInitTrianglePlateau.csv"))
+        using (StreamReader inputs = new StreamReader("../../../../inputsForTests/testInitTrianglePlateau.csv"))
         {
             Console.SetIn(inputs);
             _commandCenter.InitEnvironment();
@@ -41,7 +41,7 @@ public class CommandCenterTests
     [Test]
     public void Calling_AddVehicle_Should_Add_A_Vehicle_To_The_Plateau()
     {
-        using (StreamReader inputs = new StreamReader("../../../../inputs/testAddVehicle.csv"))
+        using (StreamReader inputs = new StreamReader("../../../../inputsForTests/testAddVehicle.csv"))
         {
             Console.SetIn(inputs);
             _commandCenter.InitEnvironment();
@@ -71,7 +71,7 @@ public class CommandCenterTests
     [Test]
     public void Calling_AddVehicle_With_Input_Of_Movement_Instructions_Should_Move_The_Vehicle()
     {
-        using (StreamReader inputs = new StreamReader("../../../../inputs/testMove.csv"))
+        using (StreamReader inputs = new StreamReader("../../../../inputsForTests/testMove.csv"))
         { 
             Console.SetIn(inputs);
             _commandCenter.InitEnvironment();
@@ -100,7 +100,7 @@ public class CommandCenterTests
     [Test]
     public void Calling_AddVehicle_With_Input_Of_Movement_Instructions_Trying_To_Move_Out_Of_The_Plateau_Should_Stop_At_The_Boundary()
     {
-        using (StreamReader inputs = new StreamReader("../../../../inputs/testBoundary.csv"))
+        using (StreamReader inputs = new StreamReader("../../../../inputsForTests/testBoundary.csv"))
         {
             Console.SetIn(inputs);
             _commandCenter.InitEnvironment();
@@ -129,7 +129,7 @@ public class CommandCenterTests
     [Test]
     public void Adding_Two_Vehicles_And_Trying_To_Move_Into_One_Another_Should_Stop_In_Front_Of_The_Vehicle()
     {
-        using (StreamReader inputs = new StreamReader("../../../../inputs/testObstacle.csv"))
+        using (StreamReader inputs = new StreamReader("../../../../inputsForTests/testObstacle.csv"))
         {
             Console.SetIn(inputs);
             _commandCenter.InitEnvironment();
@@ -158,7 +158,7 @@ public class CommandCenterTests
     [Test]
     public void Calling_AddObstacles_To_Add_Some_Alien_Should_Be_Able_To_Add_Some_Aliens()
     {
-        using (StreamReader inputs = new StreamReader("../../../../inputs/testAlien.csv"))
+        using (StreamReader inputs = new StreamReader("../../../../inputsForTests/testAlien.csv"))
         {
             Console.SetIn(inputs);
             _commandCenter.InitEnvironment();
@@ -180,7 +180,7 @@ public class CommandCenterTests
     [Test]
     public void A_Plateau_With_Size_Less_Than_8_Should_Not_Ask_User_To_Add_Obstacle()
     {
-        using (StreamReader inputs = new StreamReader("../../../../inputs/testPlasteauSmallerThan8.csv"))
+        using (StreamReader inputs = new StreamReader("../../../../inputsForTests/testPlasteauSmallerThan8.csv"))
         {
             Console.SetIn(inputs);
             _commandCenter.InitEnvironment();
