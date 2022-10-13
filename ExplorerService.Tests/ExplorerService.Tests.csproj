@@ -21,4 +21,12 @@
     <ProjectReference Include="..\ExplorerService\ExplorerService.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Controller\" />
+    <None Remove="View\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controller\" />
+    <Folder Include="View\" />
+  </ItemGroup>
 </Project>
